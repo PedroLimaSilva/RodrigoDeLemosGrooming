@@ -1,14 +1,28 @@
 <script>
+	export let data;
+
+	const sections = data.sections;
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>{data.name}</title>
+	<meta name="description" content="Rodrigo de Lemos - Dog Grooming" />
 </svelte:head>
 
-<section>
-	<h1>Rodrigo de Lemos</h1>
-</section>
+{#if sections && sections.length}
+	{#each sections as section}
+		<section
+			style={`
+			background-image: url('${section.background}');
+			min-height: ${100 / sections.length}vh;
+		`}
+		>
+			<h1>{section.header}</h1>
+		</section>
+	{/each}
+{:else}
+	<p>No sections found.</p>
+{/if}
 
 <style>
 	section {
@@ -17,6 +31,8 @@
 		justify-content: center;
 		align-items: center;
 		flex: 0.6;
+		background-position: center;
+		background-size: cover;
 	}
 
 	h1 {
