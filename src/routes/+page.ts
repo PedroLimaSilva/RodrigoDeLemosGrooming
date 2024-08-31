@@ -4,7 +4,7 @@ const client = createClient({
 	projectId: 'czvz7019',
 	dataset: 'production',
 	apiVersion: '2021-10-21',
-	useCdn: false
+	useCdn: true
 });
 
 export async function load({ params }) {
