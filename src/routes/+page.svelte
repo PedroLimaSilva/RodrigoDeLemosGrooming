@@ -9,8 +9,9 @@
 
 <svelte:head>
 	<!-- <title>{data.name}</title> -->
-	<title>{'Rodrigo de Lemos'}</title>
-	<meta name="description" content="Rodrigo de Lemos - Dog Grooming" />
+	<title>{'Rodrigo De Lemos'}</title>
+	<meta name="description" content="Rodrigo De Lemos - Dog Grooming" />
+	<link rel="manifest" href="manifest.json" />
 </svelte:head>
 
 <Landing />

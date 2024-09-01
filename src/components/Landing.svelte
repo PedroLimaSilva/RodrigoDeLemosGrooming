@@ -1,5 +1,5 @@
 <section class="Landing">
-	<h1>Rodrigo de Lemos</h1>
+	<h1>Rodrigo De Lemos</h1>
 	<p>Dog Grooming Services</p>
 	<button>Book an Appointment</button>
 </section>
