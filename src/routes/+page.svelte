@@ -1,14 +1,20 @@
 <script>
-	export let data;
+	import Landing from '../components/Landing.svelte';
 
-	const sections = data.sections;
+	// export let data;
+
+	// const sections = data.sections;
 </script>
 
 <svelte:head>
-	<title>{data.name}</title>
+	<!-- <title>{data.name}</title> -->
+	<title>{'Rodrigo de Lemos'}</title>
 	<meta name="description" content="Rodrigo de Lemos - Dog Grooming" />
 </svelte:head>
 
+<Landing />
+
+<!-- 
 {#if sections && sections.length}
 	{#each sections as section}
 		<section
@@ -22,9 +28,9 @@
 	{/each}
 {:else}
 	<p>No sections found.</p>
-{/if}
-
+{/if} -->
 <style>
+	/*
 	section {
 		display: flex;
 		flex-direction: column;
@@ -38,4 +44,5 @@
 	h1 {
 		width: 100%;
 	}
+	*/
 </style>
