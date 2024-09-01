@@ -1,5 +1,6 @@
 <script>
 	import Landing from '../components/Landing.svelte';
+	import Gallery from '../components/Gallery/index.svelte';
 
 	// export let data;
 
@@ -13,6 +14,7 @@
 </svelte:head>
 
 <Landing />
+<Gallery />
 
 <!-- 
 {#if sections && sections.length}
