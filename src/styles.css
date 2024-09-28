@@ -25,6 +25,7 @@ body {
 	background-attachment: fixed;
 	background-color: var(--color-bg-0);
 	background-size: 100vw 100vh;
+	overflow-x: hidden;
 }
 
 @media (min-width: 720px) {
