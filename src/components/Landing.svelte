@@ -26,6 +26,7 @@
 
 	.Landing .container {
 		position: relative;
+		flex: 1;
 	}
 
 	.Landing img {
@@ -38,7 +39,7 @@
 
 	h1 {
 		font-weight: bold;
-		font-size: 5rem;
+		font-size: 10vh;
 		margin: 0;
 		line-height: 1.1em;
 	}
