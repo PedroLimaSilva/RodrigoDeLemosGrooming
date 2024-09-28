@@ -5,13 +5,13 @@
 <section class="Testimonials">
 	<div class="container">
 		<Item
-      layout={'left'}
+			layout={'left'}
 			author={'Gabriela, and her toy Poodle, Jorge'}
 			image={'/Testimonial.png'}
 			quote={'My poodle loves to play in the mud, but Rodrigo can always clean and care for his coat'}
 		/>
-    <Item
-      layout={'right'}
+		<Item
+			layout={'right'}
 			author={'Gabriela, and her toy Poodle, Jorge'}
 			image={'/Testimonial.png'}
 			quote={'My poodle loves to play in the mud, but Rodrigo can always clean and care for his coat'}
@@ -20,6 +20,10 @@
 </section>
 
 <style>
+	.Testimonials {
+		background: white;
+	}
+  
 	.Testimonials .container {
 		padding: 0;
 	}

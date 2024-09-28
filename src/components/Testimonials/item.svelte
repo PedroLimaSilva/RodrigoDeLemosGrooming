@@ -48,8 +48,8 @@
 	}
 
 	img {
-		width: auto;
-		height: 100%;
+		width: 100%;
+		height: auto;
 		max-width: 100%;
 		border-radius: 42px;
 	}
@@ -59,17 +59,13 @@
 			grid-template-columns: 1fr 2fr;
 			gap: 5vw;
 		}
-		img {
-			width: 100%;
-			height: auto;
+
+		.right {
+			grid-template-columns: 2fr 1fr;
 		}
 
-    .right {
-      grid-template-columns: 2fr 1fr;
-    }
-
-    .right img{
-      order: 2;
-    }
+		.right img {
+			order: 2;
+		}
 	}
 </style>
