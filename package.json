@@ -32,6 +32,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sanity/client": "^6.21.3"
+		"@sanity/client": "^6.21.3",
+		"playwright": "^1.47.2"
 	}
 }
