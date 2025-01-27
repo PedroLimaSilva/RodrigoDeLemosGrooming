@@ -1,6 +1,6 @@
-import { devices, type PlaywrightTestConfig } from 'playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 
-const config: PlaywrightTestConfig = {
+export default defineConfig({
 	expect: {
 		toHaveScreenshot: { maxDiffPixels: 0 }
 	},
@@ -38,6 +38,4 @@ const config: PlaywrightTestConfig = {
 	},
 	testDir: 'tests',
 	testMatch: /(.+\.)?(test|spec)\.[jt]s/
-};
-
-export default config;
+});

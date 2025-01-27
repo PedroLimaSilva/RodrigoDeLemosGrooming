@@ -1,10 +1,6 @@
 <script>
 	import Landing from '../components/Landing.svelte';
 	import Testimonials from '../components/Testimonials/index.svelte';
-
-	// export let data;
-
-	// const sections = data.sections;
 </script>
 
 <svelte:head>
