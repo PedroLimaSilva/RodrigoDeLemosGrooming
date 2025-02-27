@@ -13,7 +13,7 @@ export function Landing() {
         <p className='font-thin text-3xl md:text-5xl mb-16'>Dog Grooming Services</p>
       </div>
       <div className='container absolute mx-auto max-w-[1080px] inset-0'>
-        <a className='button absolute bottom-8' href='tel:+351935871091'>
+        <a className='button absolute bottom-8' href='https://api.whatsapp.com/send?phone=+351935871091'>
           Book an Appointment
         </a>
       </div>
