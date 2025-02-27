@@ -23,13 +23,6 @@ export default defineConfig({
         ...devices['iPhone 15 Pro Max'],
       },
     },
-
-		{
-      name: 'Mobile Landscape',
-      use: {
-        ...devices['iPhone 15 Pro Max landscape'],
-      },
-    },
   ],
 	updateSnapshots: 'missing',
 	webServer: {
