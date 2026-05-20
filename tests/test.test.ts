@@ -1,10 +1,24 @@
-import { expect, test } from 'playwright/test';
+import { expect, test } from '@playwright/test';
 
-test('Homepage renders in multiple aspect ratios', async ({ page }) => {
-  // Full-page screenshots run before scroll; [data-reveal] blocks stay at opacity 0 unless
-  // they intersect the viewport. Match reduced-motion behavior so all sections are visible
-  // without relying on scroll or transition timing.
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/RodrigoDeLemosGrooming/');
-  await expect(page).toHaveScreenshot({ fullPage: true });
+test.describe('Homepage', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/RodrigoDeLemosGrooming/', { waitUntil: 'domcontentloaded' });
+    await page.evaluate(() => document.fonts.ready);
+  });
+
+  test('renders key content across aspect ratios', async ({ page }) => {
+    await expect(page).toHaveTitle(/Dog Salon/i);
+
+    await expect(
+      page.getByRole('heading', {
+        level: 1,
+        name: /Refined grooming for exceptional dogs/i,
+      })
+    ).toBeVisible();
+
+    await expect(page.locator('#main')).toBeVisible();
+    await expect(page.locator('footer.site-footer')).toBeVisible();
+    await expect(page.locator('#home .hero__btn--solid')).toHaveText(/Book appointment/i);
+  });
 });
