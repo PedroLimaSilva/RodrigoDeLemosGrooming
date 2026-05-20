@@ -257,16 +257,27 @@ const links = [
 
     .site-header__nav {
       position: absolute;
-      top: calc(100% + 0.5rem);
+      top: calc(100% + 0.65rem);
       left: 0;
       right: 0;
       flex: none;
       justify-content: stretch;
       margin: 0;
-      padding: 0.5rem 0 1.25rem;
-      background: rgba($burgundy-deep, 0.97);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+      padding: 0;
+      overflow: hidden;
+      background: linear-gradient(
+        168deg,
+        rgba($burgundy, 0.55) 0%,
+        rgba($burgundy-deep, 0.98) 42%,
+        rgba(0, 0, 0, 0.42) 100%
+      );
+      border: 1px solid rgba($champagne, 0.38);
+      border-radius: 2px;
+      box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.35) inset,
+        0 28px 56px rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
@@ -275,6 +286,23 @@ const links = [
         opacity $duration-medium $ease-out-expo,
         visibility $duration-medium $ease-out-expo,
         transform $duration-medium $ease-out-expo;
+    }
+
+    .site-header__nav::before {
+      content: '';
+      display: block;
+      height: 2px;
+      margin: 0 1.15rem;
+      margin-bottom: 0.15rem;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba($champagne, 0.2) 18%,
+        rgba($champagne, 0.75) 50%,
+        rgba($champagne, 0.2) 82%,
+        transparent 100%
+      );
+      opacity: 0.95;
     }
 
     .site-header.is-menu-open .site-header__nav {
@@ -286,9 +314,51 @@ const links = [
 
     .site-header__nav ul {
       flex-direction: column;
-      align-items: center;
-      gap: 1.1rem;
+      align-items: stretch;
+      gap: 0;
       flex-wrap: nowrap;
+      width: 100%;
+      padding: 0.2rem 0 0.35rem;
+    }
+
+    .site-header__nav li {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .site-header__nav li:last-child {
+      border-bottom: none;
+    }
+
+    .site-header__nav a {
+      display: block;
+      padding: 1.05rem 1.35rem;
+      text-align: left;
+      letter-spacing: 0.22em;
+      font-size: 0.74rem;
+      opacity: 0.94;
+      color: rgba(255, 255, 255, 0.94);
+      border-left: 2px solid transparent;
+      transition:
+        opacity $duration-medium $ease-out-expo,
+        color $duration-medium $ease-out-expo,
+        border-color $duration-medium $ease-out-expo,
+        background $duration-medium $ease-out-expo,
+        padding-left $duration-medium $ease-out-expo;
+    }
+
+    .site-header__nav a:hover {
+      color: $champagne;
+      background: rgba($champagne, 0.06);
+      border-left-color: rgba($champagne, 0.55);
+      padding-left: 1.5rem;
+    }
+
+    .site-header__nav a:focus-visible {
+      outline: none;
+      color: $champagne;
+      background: rgba($champagne, 0.08);
+      border-left-color: rgba($champagne, 0.85);
+      padding-left: 1.5rem;
     }
 
     .site-header__book {
@@ -307,6 +377,7 @@ const links = [
 
   @media (prefers-reduced-motion: reduce) {
     .site-header__nav,
+    .site-header__nav a,
     .site-header__menu-bar {
       transition: none;
     }
