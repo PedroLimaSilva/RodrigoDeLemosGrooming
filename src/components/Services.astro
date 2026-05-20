@@ -1,0 +1,151 @@
+---
+import SculptureAccent from './SculptureAccent.astro';
+
+const services = [
+  {
+    title: 'Breed styling',
+    text: 'Silhouettes and coat direction guided by breed standard and your dog’s lifestyle.',
+    variant: 'brass' as const,
+  },
+  {
+    title: 'Puppy introduction',
+    text: 'Gentle first visits that build trust, table confidence, and healthy coat routines.',
+    variant: 'porcelain' as const,
+  },
+  {
+    title: 'Hand stripping',
+    text: 'Terriers and wired coats finished with traditional techniques for correct texture.',
+    variant: 'marble' as const,
+  },
+  {
+    title: 'Spa & coat care',
+    text: 'Conditioning baths, skin-supporting products, and detail work for show-ready shine.',
+    variant: 'resin' as const,
+  },
+];
+---
+
+<section class="services" id="services" aria-labelledby="services-heading">
+  <div class="services__head u-container" data-reveal>
+    <p class="u-eyebrow services__eyebrow">Signature services</p>
+    <h2 id="services-heading" class="services__title">Tailored care for every dog.</h2>
+  </div>
+  <div class="services__grid u-container">
+    {
+      services.map((s) => (
+        <article class="services__card" data-reveal>
+          <div class="services__mascot">
+            <SculptureAccent variant={s.variant} />
+          </div>
+          <h3 class="services__name">{s.title}</h3>
+          <p class="services__text">{s.text}</p>
+          <a class="services__more" href={`${import.meta.env.BASE_URL}#contact`}>
+            Learn more →
+          </a>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/tokens' as *;
+
+  .services {
+    padding: clamp(4rem, 10vw, 6.5rem) 0;
+    background: $burgundy;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .services__head {
+    text-align: center;
+    max-width: 40rem;
+    margin-inline: auto;
+    margin-bottom: 3rem;
+  }
+
+  .services__eyebrow {
+    color: rgba($champagne, 0.95);
+  }
+
+  .services__title {
+    font-size: clamp(2rem, 3.2vw, 2.75rem);
+    margin: 0.75rem 0 0;
+    font-weight: 500;
+  }
+
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .services__card {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .services__mascot {
+    display: flex;
+    justify-content: center;
+    min-height: 140px;
+    align-items: center;
+  }
+
+  .services__mascot :global(.sculpture-accent) {
+    opacity: 0.5;
+    max-width: 100px;
+  }
+
+  .services__mascot :global(svg) {
+    width: 100%;
+    height: auto;
+  }
+
+  .services__name {
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-family: $font-sans;
+    font-weight: 700;
+    color: $champagne;
+    margin: 0;
+  }
+
+  .services__text {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    opacity: 0.86;
+    flex: 1;
+  }
+
+  .services__more {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: rgba($champagne, 0.95);
+    text-decoration: none;
+    margin-top: 0.25rem;
+  }
+
+  .services__more:hover {
+    color: #fff;
+  }
+
+  @media (max-width: 960px) {
+    .services__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .services__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,95 @@
+---
+const wa = 'https://api.whatsapp.com/send?phone=+351935871091';
+---
+
+<section class="booking" id="contact" aria-labelledby="booking-heading">
+  <div class="booking__inner u-container" data-reveal>
+    <p class="u-eyebrow booking__eyebrow">Reservations</p>
+    <h2 id="booking-heading" class="booking__title">By reservation only.</h2>
+    <p class="booking__lede">
+      A small calendar keeps each appointment unrushed. Reach out with your dog’s breed, coat goals, and preferred
+      timing — we will respond personally.
+    </p>
+    <div class="booking__actions">
+      <a class="booking__btn booking__btn--solid" href={wa}>Book appointment</a>
+      <a class="booking__btn booking__btn--ghost" href={wa}>WhatsApp</a>
+      <a class="booking__btn booking__btn--ghost" href="https://www.instagram.com/">Instagram</a>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/tokens' as *;
+
+  .booking {
+    padding: clamp(4rem, 10vw, 5.5rem) 0;
+    background: $burgundy;
+    color: rgba(255, 255, 255, 0.92);
+    text-align: center;
+  }
+
+  .booking__inner {
+    max-width: 44rem;
+  }
+
+  .booking__eyebrow {
+    color: rgba($champagne, 0.95);
+  }
+
+  .booking__title {
+    font-size: clamp(2.1rem, 3.4vw, 2.85rem);
+    margin: 0.75rem 0 1rem;
+    font-weight: 500;
+  }
+
+  .booking__lede {
+    margin: 0 auto 2rem;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    opacity: 0.85;
+    max-width: 48ch;
+  }
+
+  .booking__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  .booking__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 0.85rem 1.25rem;
+    border: 1px solid transparent;
+    transition:
+      background $duration-medium $ease-out-expo,
+      color $duration-medium $ease-out-expo,
+      border-color $duration-medium $ease-out-expo;
+  }
+
+  .booking__btn--solid {
+    background: $champagne;
+    color: $burgundy;
+  }
+
+  .booking__btn--solid:hover {
+    background: $champagne-hover;
+  }
+
+  .booking__btn--ghost {
+    border-color: rgba($champagne, 0.45);
+    color: $champagne;
+    background: transparent;
+  }
+
+  .booking__btn--ghost:hover {
+    background: rgba($champagne, 0.08);
+  }
+</style>

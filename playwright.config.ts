@@ -1,9 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-	expect: {
-		toHaveScreenshot: { maxDiffPixels: 0 }
-	},
+  expect: {
+    toHaveScreenshot: { maxDiffPixels: 0 },
+  },
   projects: [
     {
       name: 'chromium',
@@ -12,23 +12,23 @@ export default defineConfig({
       },
     },
     {
-      name: 'Mobile Safari Small',
+      name: 'Mobile Chrome Small',
       use: {
-        ...devices['iPhone 13'],
+        ...devices['Pixel 5'],
       },
     },
     {
-      name: 'Mobile Safari',
+      name: 'Mobile Chrome',
       use: {
-        ...devices['iPhone 15 Pro Max'],
+        ...devices['Pixel 7'],
       },
     },
   ],
-	updateSnapshots: 'missing',
-	webServer: {
-		command: 'npm run build && npm run preview',
-		port: 4173
-	},
-	testDir: 'tests',
-	testMatch: /(.+\.)?(test|spec)\.[jt]s/
+  updateSnapshots: 'missing',
+  webServer: {
+    command: 'npm run build && npm run preview -- --host 127.0.0.1',
+    port: 4321,
+  },
+  testDir: 'tests',
+  testMatch: /(.+\.)?(test|spec)\.[jt]s/,
 });

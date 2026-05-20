@@ -1,0 +1,91 @@
+---
+import '../styles/global.scss';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Rodrigo De Lemos — Dog Salon & Atelier',
+  description = 'Refined grooming for exceptional dogs. Boutique care, breed expertise, and a calm atelier experience in Portugal.',
+} = Astro.props;
+
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+const iconHref = `${basePath}/favicon.png`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href={iconHref} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+    <script is:inline>
+      (function () {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.querySelectorAll('[data-reveal]').forEach(function (el) {
+            el.classList.add('is-revealed');
+          });
+          return;
+        }
+        var els = document.querySelectorAll('[data-reveal]');
+        if (!els.length || !('IntersectionObserver' in window)) {
+          els.forEach(function (el) {
+            el.classList.add('is-revealed');
+          });
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-revealed');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
+        );
+        els.forEach(function (el) {
+          io.observe(el);
+        });
+      })();
+    </script>
+  </body>
+</html>
+
+<style lang="scss">
+  @use '../styles/tokens' as *;
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    padding: 0.75rem 1rem;
+    background: $ivory;
+    color: $burgundy;
+    font-family: $font-sans;
+    font-weight: 600;
+  }
+
+  .skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+    outline: 2px solid $champagne;
+    outline-offset: 2px;
+  }
+</style>

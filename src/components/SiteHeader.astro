@@ -1,0 +1,142 @@
+---
+const base = import.meta.env.BASE_URL;
+const links = [
+  { href: `${base}#home`, label: 'Home' },
+  { href: `${base}#services`, label: 'Services' },
+  { href: `${base}#portfolio`, label: 'Portfolio' },
+  { href: `${base}#philosophy`, label: 'About' },
+  { href: `${base}#contact`, label: 'Contact' },
+];
+---
+
+<header class="site-header">
+  <div class="site-header__inner u-container">
+    <a class="site-header__logo" href={`${base}#home`}>
+      <span class="site-header__logo-mark">Rodrigo De Lemos</span>
+      <span class="site-header__logo-sub">Dog Salon &amp; Atelier</span>
+    </a>
+    <nav class="site-header__nav" aria-label="Primary">
+      <ul>
+        {
+          links.map(({ href, label }) => (
+            <li>
+              <a href={href}>{label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <a class="site-header__book" href="https://api.whatsapp.com/send?phone=+351935871091">Book appointment</a>
+  </div>
+</header>
+
+<style lang="scss">
+  @use '../styles/tokens' as *;
+
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 30;
+    padding: 1.35rem 0;
+    color: rgba(255, 255, 255, 0.92);
+    background: rgba($burgundy, 0.94);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(8px);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+
+  .site-header__logo {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 12rem;
+  }
+
+  .site-header__logo:hover .site-header__logo-mark {
+    color: $champagne;
+  }
+
+  .site-header__logo-mark {
+    font-family: $font-serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color $duration-medium $ease-out-expo;
+  }
+
+  .site-header__logo-sub {
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    font-weight: 500;
+  }
+
+  .site-header__nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .site-header__nav a {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 600;
+    opacity: 0.88;
+    transition: opacity $duration-medium $ease-out-expo;
+  }
+
+  .site-header__nav a:hover {
+    opacity: 1;
+    color: $champagne;
+  }
+
+  .site-header__book {
+    flex-shrink: 0;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.65rem 1.1rem;
+    border: 1px solid rgba($champagne, 0.65);
+    color: $champagne;
+    transition:
+      background $duration-medium $ease-out-expo,
+      color $duration-medium $ease-out-expo;
+  }
+
+  .site-header__book:hover {
+    background: rgba($champagne, 0.12);
+  }
+
+  @media (max-width: 900px) {
+    .site-header__inner {
+      flex-wrap: wrap;
+    }
+
+    .site-header__nav {
+      order: 3;
+      width: 100%;
+    }
+
+    .site-header__nav ul {
+      justify-content: flex-start;
+      gap: 1.25rem;
+    }
+  }
+</style>

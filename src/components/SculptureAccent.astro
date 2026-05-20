@@ -1,0 +1,64 @@
+---
+interface Props {
+  variant?: 'brass' | 'porcelain' | 'marble' | 'resin';
+  class?: string;
+}
+
+const { variant = 'brass', class: className = '' } = Astro.props;
+const uid = `sc-${Math.random().toString(36).slice(2, 9)}`;
+
+const gradients: Record<
+  NonNullable<Props['variant']>,
+  { a: string; b: string; c: string; stroke: string; opacity: number }
+> = {
+  brass: { a: '#f4d9a4', b: '#c9a068', c: '#7a5a32', stroke: '#5c4224', opacity: 0.92 },
+  porcelain: { a: '#ffffff', b: '#ebe7e2', c: '#cfc7be', stroke: '#a39a91', opacity: 0.95 },
+  marble: { a: '#f0ece8', b: '#d8d0c8', c: '#a89f96', stroke: '#7a726b', opacity: 0.9 },
+  resin: { a: '#f8e8dc', b: '#e8c4b4', c: '#c99a88', stroke: '#8f5f52', opacity: 0.55 },
+};
+const g = gradients[variant];
+---
+
+<span class:list={['sculpture-accent', className]} data-variant={variant} aria-hidden="true">
+  <svg viewBox="0 0 120 200" width="120" height="200" focusable="false">
+    <defs>
+      <linearGradient id={`${uid}-body`} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color={g.a} />
+        <stop offset="45%" stop-color={g.b} />
+        <stop offset="100%" stop-color={g.c} />
+      </linearGradient>
+      <linearGradient id={`${uid}-ped`} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color={g.b} />
+        <stop offset="100%" stop-color={g.c} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="60" cy="178" rx="48" ry="14" fill={`url(#${uid}-ped)`} opacity="0.85" />
+    <path
+      fill={`url(#${uid}-body)`}
+      fill-opacity={String(g.opacity)}
+      stroke={g.stroke}
+      stroke-width="0.6"
+      stroke-opacity="0.35"
+      d="M38 42 C48 18 72 14 88 28 C102 40 104 62 96 78 L92 148 C90 162 78 168 60 168 C42 168 30 160 28 146 L24 78 C20 58 26 48 38 42 Z"
+    ></path>
+    <path
+      fill={`url(#${uid}-body)`}
+      fill-opacity="0.35"
+      d="M52 52 C58 44 70 42 78 50 C82 56 80 66 72 70 C64 74 54 68 52 58 Z"
+    ></path>
+  </svg>
+</span>
+
+<style lang="scss">
+  .sculpture-accent {
+    display: block;
+    opacity: 0.55;
+    filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.18));
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .sculpture-accent[data-variant='resin'] {
+    opacity: 0.42;
+  }
+</style>

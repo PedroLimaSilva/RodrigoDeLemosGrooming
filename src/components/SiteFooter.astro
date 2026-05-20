@@ -1,0 +1,135 @@
+---
+const base = import.meta.env.BASE_URL;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner u-container">
+    <div class="site-footer__brand">
+      <p class="site-footer__logo">Rodrigo De Lemos</p>
+      <p class="site-footer__tag">Dog Salon &amp; Atelier</p>
+    </div>
+    <div class="site-footer__cols">
+      <div>
+        <p class="site-footer__heading">Menu</p>
+        <ul>
+          <li><a href={`${base}#home`}>Home</a></li>
+          <li><a href={`${base}#services`}>Services</a></li>
+          <li><a href={`${base}#portfolio`}>Portfolio</a></li>
+          <li><a href={`${base}#contact`}>Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="site-footer__heading">Visit</p>
+        <p class="site-footer__text">By appointment. Calm, private grooming sessions tailored to each dog.</p>
+      </div>
+      <div>
+        <p class="site-footer__heading">Follow</p>
+        <p class="site-footer__text">
+          <a href="https://api.whatsapp.com/send?phone=+351935871091">WhatsApp</a>
+          <span class="site-footer__sep">·</span>
+          <a href="https://www.instagram.com/">Instagram</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p class="site-footer__legal u-container">© {year} Rodrigo De Lemos. Crafted with care.</p>
+</footer>
+
+<style lang="scss">
+  @use '../styles/tokens' as *;
+
+  .site-footer {
+    background: $charcoal;
+    color: rgba(255, 255, 255, 0.82);
+    padding: 4rem 0 2rem;
+    margin-top: 0;
+  }
+
+  .site-footer__inner {
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: 1fr 2fr;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .site-footer__logo {
+    font-family: $font-serif;
+    font-size: 1.75rem;
+    color: $champagne;
+    margin: 0 0 0.35rem;
+    letter-spacing: 0.04em;
+  }
+
+  .site-footer__tag {
+    margin: 0;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.65;
+  }
+
+  .site-footer__cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .site-footer__heading {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin: 0 0 1rem;
+    color: $champagne;
+    font-weight: 600;
+  }
+
+  .site-footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .site-footer a {
+    color: rgba(255, 255, 255, 0.88);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  .site-footer a:hover {
+    color: $champagne;
+  }
+
+  .site-footer__text {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.88;
+  }
+
+  .site-footer__sep {
+    margin: 0 0.35rem;
+    opacity: 0.5;
+  }
+
+  .site-footer__legal {
+    margin: 1.5rem auto 0;
+    font-size: 0.8rem;
+    opacity: 0.45;
+    text-align: center;
+  }
+
+  @media (max-width: 800px) {
+    .site-footer__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .site-footer__cols {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
