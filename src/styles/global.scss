@@ -87,3 +87,7 @@ h4 {
     transition: none;
   }
 }
+
+body.is-header-menu-open {
+  overflow: hidden;
+}

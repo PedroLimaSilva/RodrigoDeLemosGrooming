@@ -14,7 +14,12 @@ const links = [
 <header class="site-header" data-header>
   <div class="site-header__inner u-container">
     <BrandLogo />
-    <nav class="site-header__nav" aria-label="Primary">
+    <nav
+      class="site-header__nav"
+      id="site-header-primary-nav"
+      data-header-nav
+      aria-label="Primary"
+    >
       <ul>
         {
           links.map(({ href, label }) => (
@@ -25,7 +30,28 @@ const links = [
         }
       </ul>
     </nav>
-    <a class="site-header__book" href="https://api.whatsapp.com/send?phone=+351935871091">Book appointment</a>
+    <a
+      class="site-header__book"
+      href="https://api.whatsapp.com/send?phone=+351935871091"
+      aria-label="Book appointment"
+    >
+      <span class="site-header__book-label">Book appointment</span>
+      <span class="site-header__book-label site-header__book-label--short" aria-hidden="true">Book</span>
+    </a>
+    <button
+      class="site-header__menu-toggle"
+      type="button"
+      data-header-menu-toggle
+      aria-expanded="false"
+      aria-controls="site-header-primary-nav"
+      aria-label="Open menu"
+    >
+      <span class="site-header__menu-bars" aria-hidden="true">
+        <span class="site-header__menu-bar"></span>
+        <span class="site-header__menu-bar"></span>
+        <span class="site-header__menu-bar"></span>
+      </span>
+    </button>
   </div>
 </header>
 
@@ -33,16 +59,56 @@ const links = [
   (function () {
     var header = document.querySelector('[data-header]');
     if (!header) return;
+
     var onScroll = function () {
       header.classList.toggle('is-scrolled', window.scrollY > 48);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+
+    var toggle = header.querySelector('[data-header-menu-toggle]');
+    var nav = header.querySelector('[data-header-nav]');
+    if (!toggle || !nav) return;
+
+    var mq = window.matchMedia('(max-width: 1080px)');
+
+    function setMenuOpen(open) {
+      header.classList.toggle('is-menu-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      document.body.classList.toggle('is-header-menu-open', open && mq.matches);
+    }
+
+    function closeIfDesktop() {
+      if (!mq.matches) setMenuOpen(false);
+    }
+
+    toggle.addEventListener('click', function () {
+      setMenuOpen(!header.classList.contains('is-menu-open'));
+    });
+
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        setMenuOpen(false);
+      });
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setMenuOpen(false);
+    });
+
+    if (typeof mq.addEventListener === 'function') {
+      mq.addEventListener('change', closeIfDesktop);
+    } else {
+      mq.addListener(closeIfDesktop);
+    }
   })();
 </script>
 
 <style lang="scss">
   @use '../styles/tokens' as *;
+
+  $nav-collapse-bp: 1080px;
 
   .site-header {
     position: fixed;
@@ -58,17 +124,26 @@ const links = [
       backdrop-filter $duration-medium $ease-out-expo;
   }
 
-  .site-header.is-scrolled {
+  .site-header.is-scrolled,
+  .site-header.is-menu-open {
     background: rgba($burgundy, 0.94);
     border-bottom-color: rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(8px);
   }
 
   .site-header__inner {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: clamp(0.75rem, 2vw, 2rem);
     justify-content: space-between;
+  }
+
+  .site-header__nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
   }
 
   .site-header__nav ul {
@@ -77,7 +152,7 @@ const links = [
     padding: 0;
     display: flex;
     gap: 1.75rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
   }
 
@@ -115,19 +190,134 @@ const links = [
     background: rgba($champagne, 0.12);
   }
 
-  @media (max-width: 900px) {
-    .site-header__inner {
-      flex-wrap: wrap;
+  .site-header__book-label--short {
+    display: none;
+  }
+
+  .site-header__menu-toggle {
+    display: none;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin: 0;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 2px;
+    background: rgba(0, 0, 0, 0.12);
+    color: inherit;
+    cursor: pointer;
+    transition:
+      border-color $duration-medium $ease-out-expo,
+      background $duration-medium $ease-out-expo;
+  }
+
+  .site-header__menu-toggle:hover {
+    border-color: rgba($champagne, 0.55);
+    background: rgba($champagne, 0.08);
+  }
+
+  .site-header__menu-bars {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.35rem;
+    width: 1.15rem;
+  }
+
+  .site-header__menu-bar {
+    display: block;
+    height: 2px;
+    background: currentColor;
+    border-radius: 1px;
+    transition:
+      transform $duration-medium $ease-out-expo,
+      opacity $duration-medium $ease-out-expo;
+    transform-origin: center;
+  }
+
+  .site-header.is-menu-open .site-header__menu-bar:nth-child(1) {
+    transform: translateY(0.45rem) rotate(45deg);
+  }
+
+  .site-header.is-menu-open .site-header__menu-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .site-header.is-menu-open .site-header__menu-bar:nth-child(3) {
+    transform: translateY(-0.45rem) rotate(-45deg);
+  }
+
+  @media (max-width: $nav-collapse-bp) {
+    .site-header__menu-toggle {
+      display: inline-flex;
     }
 
     .site-header__nav {
-      order: 3;
-      width: 100%;
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 0;
+      right: 0;
+      flex: none;
+      justify-content: stretch;
+      margin: 0;
+      padding: 0.5rem 0 1.25rem;
+      background: rgba($burgundy-deep, 0.97);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-0.35rem);
+      transition:
+        opacity $duration-medium $ease-out-expo,
+        visibility $duration-medium $ease-out-expo,
+        transform $duration-medium $ease-out-expo;
+    }
+
+    .site-header.is-menu-open .site-header__nav {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
     }
 
     .site-header__nav ul {
-      justify-content: flex-end;
-      gap: 1.25rem;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.1rem;
+      flex-wrap: nowrap;
+    }
+
+    .site-header__book {
+      padding: 0.55rem 0.75rem;
+      letter-spacing: 0.12em;
+    }
+
+    .site-header__book-label:not(.site-header__book-label--short) {
+      display: none;
+    }
+
+    .site-header__book-label--short {
+      display: inline;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header__nav,
+    .site-header__menu-bar {
+      transition: none;
+    }
+
+    .site-header.is-menu-open .site-header__menu-bar:nth-child(1),
+    .site-header.is-menu-open .site-header__menu-bar:nth-child(3) {
+      transform: none;
+    }
+
+    .site-header.is-menu-open .site-header__menu-bar:nth-child(2) {
+      opacity: 0;
     }
   }
 </style>
