@@ -1,0 +1,127 @@
+---
+import SculptureAccent from './SculptureAccent.astro';
+---
+
+<section class="testimonials" id="testimonials" aria-labelledby="testimonials-heading">
+  <div class="testimonials__grid u-container">
+    <div class="testimonials__figure" data-reveal>
+      <SculptureAccent variant="porcelain" class="testimonials__sculpture" />
+    </div>
+    <div class="testimonials__editorial" data-reveal>
+      <p class="u-eyebrow testimonials__eyebrow">Kind words</p>
+      <h2 id="testimonials-heading" class="visually-hidden">Testimonials</h2>
+      <blockquote class="testimonials__quote">
+        <p>
+          “Rodrigo's attention to detail and genuine care for our dogs is unmatched. Every visit feels personal,
+          calm, and beautifully finished.”
+        </p>
+      </blockquote>
+      <p class="testimonials__cite">Juliana M. — Poodle owner</p>
+      <div class="testimonials__dots" aria-hidden="true">
+        <span /><span /><span />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/tokens' as *;
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .testimonials {
+    padding: clamp(4rem, 10vw, 6.5rem) 0;
+    background: $ivory;
+  }
+
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(2rem, 6vw, 4rem);
+    align-items: center;
+  }
+
+  .testimonials__figure {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 320px;
+  }
+
+  .testimonials__sculpture {
+    max-width: min(220px, 50vw);
+    opacity: 0.65;
+  }
+
+  .testimonials__sculpture :global(svg) {
+    width: 100%;
+    height: auto;
+  }
+
+  .testimonials__eyebrow {
+    color: $burgundy;
+    margin-bottom: 1.25rem;
+  }
+
+  .testimonials__quote {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .testimonials__quote p {
+    font-family: $font-serif;
+    font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+    line-height: 1.25;
+    color: $burgundy;
+    margin: 0;
+    max-width: 22ch;
+  }
+
+  .testimonials__cite {
+    margin: 1.75rem 0 0;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: rgba($charcoal, 0.55);
+  }
+
+  .testimonials__dots {
+    display: flex;
+    gap: 0.45rem;
+    margin-top: 2rem;
+  }
+
+  .testimonials__dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba($burgundy, 0.2);
+  }
+
+  .testimonials__dots span:first-child {
+    background: $burgundy;
+  }
+
+  @media (max-width: 800px) {
+    .testimonials__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .testimonials__figure {
+      min-height: 0;
+      order: 2;
+    }
+  }
+</style>

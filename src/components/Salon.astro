@@ -1,0 +1,100 @@
+---
+const tiles = [
+  { label: 'Reception — calm arrival, warm light' },
+  { label: 'Grooming hall — precision tables & air quality' },
+  { label: 'Portrait wall — celebrated clients' },
+  { label: 'Boutique shelf — curated coat care' },
+];
+---
+
+<section class="salon" id="salon" aria-labelledby="salon-heading">
+  <div class="salon__head u-container" data-reveal>
+    <p class="u-eyebrow salon__eyebrow">The atelier</p>
+    <h2 id="salon-heading" class="salon__title">A quiet salon, built for focus.</h2>
+    <p class="salon__lede">
+      Materials, lighting, and acoustics are chosen to keep dogs relaxed. The environment should read as clearly as
+      the grooming: intentional, understated, and immaculate.
+    </p>
+  </div>
+  <div class="salon__grid u-container" data-reveal>
+    {
+      tiles.map((t) => (
+        <figure class="salon__tile">
+          <div class="salon__photo" role="presentation" />
+          <figcaption class="salon__cap">{t.label}</figcaption>
+        </figure>
+      ))
+    }
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/tokens' as *;
+
+  .salon {
+    padding: clamp(4rem, 10vw, 6.5rem) 0;
+    background: $sand;
+  }
+
+  .salon__eyebrow {
+    color: $burgundy;
+  }
+
+  .salon__title {
+    font-size: clamp(2rem, 3vw, 2.65rem);
+    color: $burgundy;
+    margin: 0.75rem 0 1rem;
+    max-width: 20ch;
+  }
+
+  .salon__lede {
+    margin: 0;
+    max-width: 56ch;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: rgba($charcoal, 0.78);
+  }
+
+  .salon__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .salon__tile {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .salon__photo {
+    aspect-ratio: 4 / 5;
+    background:
+      linear-gradient(120deg, rgba($burgundy, 0.12), transparent),
+      linear-gradient(300deg, rgba($champagne, 0.25), #eae4dc);
+    border: 1px solid rgba($burgundy, 0.06);
+  }
+
+  .salon__cap {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: rgba($charcoal, 0.55);
+    line-height: 1.45;
+  }
+
+  @media (max-width: 960px) {
+    .salon__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .salon__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

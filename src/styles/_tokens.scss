@@ -1,0 +1,24 @@
+// Luxury atelier palette
+@use 'sass:color';
+
+$burgundy: #840029;
+$burgundy-deep: #1a0508;
+$champagne: #efae73;
+$ivory: #f6f1ea;
+$sand: #ebe3d8;
+$charcoal: #141414;
+$stone: #2a2424;
+
+$burgundy-hero-glow: color.adjust($burgundy, $lightness: 6%);
+$burgundy-hero-shadow: color.adjust($burgundy, $lightness: -6%);
+$burgundy-plaque-top: color.adjust($burgundy, $lightness: -4%);
+$burgundy-plaque-bottom: color.adjust($burgundy, $lightness: -3%);
+$champagne-hover: color.adjust($champagne, $lightness: 6%);
+$burgundy-link-hover: color.adjust($burgundy, $lightness: -5%);
+
+$font-serif: 'Cormorant Garamond', 'Palatino Linotype', Palatino, Georgia, serif;
+$font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
+
+$ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+$duration-slow: 1s;
+$duration-medium: 0.65s;

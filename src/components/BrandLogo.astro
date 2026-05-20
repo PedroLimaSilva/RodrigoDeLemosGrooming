@@ -1,0 +1,71 @@
+---
+interface Props {
+  variant?: 'header' | 'footer';
+  class?: string;
+}
+
+const { variant = 'header', class: className = '' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const logoHorizontal = `${base}/candoro-logo-horizontal.svg`;
+const logoVertical = `${base}/candoro-logo-vertical.svg`;
+---
+
+{
+  variant === 'footer' ? (
+    <div class:list={['brand-logo', 'brand-logo--footer', className]}>
+      <img
+        class="brand-logo__lockup"
+        src={logoVertical}
+        alt="CAN D'ORO — Dog Salon &amp; Boutique"
+        width="200"
+        height="167"
+        decoding="async"
+      />
+    </div>
+  ) : (
+    <a class:list={['brand-logo', 'brand-logo--header', className]} href={`${base}#home`}>
+      <img
+        class="brand-logo__lockup"
+        src={logoHorizontal}
+        alt="CAN D'ORO — Dog Salon &amp; Boutique"
+        width="280"
+        height="42"
+        decoding="async"
+      />
+    </a>
+  )
+}
+
+<style lang="scss">
+  @use '../styles/tokens' as *;
+
+  .brand-logo--header {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+    color: inherit;
+  }
+
+  .brand-logo--header .brand-logo__lockup {
+    display: block;
+    height: 2.65rem;
+    width: auto;
+    max-width: min(17rem, 42vw);
+  }
+
+  .brand-logo--header:hover .brand-logo__lockup {
+    opacity: 0.92;
+  }
+
+  .brand-logo--footer {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .brand-logo--footer .brand-logo__lockup {
+    display: block;
+    width: min(10.5rem, 40vw);
+    height: auto;
+  }
+</style>

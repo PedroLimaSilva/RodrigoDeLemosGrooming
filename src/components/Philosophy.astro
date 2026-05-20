@@ -1,0 +1,121 @@
+---
+const base = import.meta.env.BASE_URL;
+const emblem = `${import.meta.env.BASE_URL}candoro-emblem.svg`;
+---
+
+<section class="philosophy" id="philosophy" aria-labelledby="philosophy-heading">
+  <img class="philosophy__watermark" src={emblem} alt="" width="420" height="420" aria-hidden="true" />
+  <div class="philosophy__grid u-container">
+    <div class="philosophy__copy" data-reveal>
+      <p class="u-eyebrow philosophy__eyebrow">Our philosophy</p>
+      <h2 id="philosophy-heading" class="philosophy__title">Grooming is more than a service. It is craftsmanship.</h2>
+      <p class="philosophy__body">
+        Each session is paced for calm focus — individualized coat plans, breed-aware lines, and finishing that
+        honours texture and movement. The salon is intentionally quiet: fewer dogs, longer appointments, and
+        hands-on care from start to finish.
+      </p>
+      <a class="philosophy__link" href={`${base}#philosophy`}>About CAN D'ORO →</a>
+    </div>
+    <figure class="philosophy__figure" data-reveal>
+      <div class="philosophy__photo" role="img" aria-label="Editorial portrait placeholder for salon craftsmanship">
+        <span class="philosophy__photo-cap">Photography: craftsmanship &amp; coat detail</span>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/tokens' as *;
+
+  .philosophy {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(4rem, 10vw, 7rem) 0;
+    background: $ivory;
+  }
+
+  .philosophy__watermark {
+    position: absolute;
+    right: -4%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: min(28rem, 55vw);
+    height: auto;
+    opacity: 0.06;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .philosophy__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 6vw, 4rem);
+    align-items: center;
+  }
+
+  .philosophy__eyebrow {
+    color: $burgundy;
+    margin-bottom: 1rem;
+  }
+
+  .philosophy__title {
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    color: $burgundy;
+    margin: 0 0 1.5rem;
+    max-width: 18ch;
+  }
+
+  .philosophy__body {
+    margin: 0 0 1.75rem;
+    font-size: 1.05rem;
+    max-width: 48ch;
+    color: rgba($charcoal, 0.85);
+  }
+
+  .philosophy__link {
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: $burgundy;
+    text-decoration: none;
+    border-bottom: 1px solid rgba($burgundy, 0.25);
+    padding-bottom: 0.15rem;
+  }
+
+  .philosophy__link:hover {
+    color: $burgundy-link-hover;
+    border-color: rgba($champagne, 0.9);
+  }
+
+  .philosophy__figure {
+    margin: 0;
+  }
+
+  .philosophy__photo {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    background:
+      linear-gradient(145deg, rgba($burgundy, 0.08), transparent 45%),
+      linear-gradient(210deg, rgba($champagne, 0.35), rgba($sand, 0.9));
+    border: 1px solid rgba($burgundy, 0.08);
+  }
+
+  .philosophy__photo-cap {
+    position: absolute;
+    left: 1.25rem;
+    bottom: 1.25rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba($charcoal, 0.55);
+    max-width: 24ch;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 860px) {
+    .philosophy__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

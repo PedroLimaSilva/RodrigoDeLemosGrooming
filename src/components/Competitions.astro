@@ -1,0 +1,151 @@
+---
+const plaques = [
+  {
+    year: '2024',
+    lines: ['National grooming showcase — merit award', 'Advanced coat finishing clinic'],
+  },
+  {
+    year: '2023',
+    lines: ['Terrier specialist workshop — guest demonstrator', 'Salon excellence — client care citation'],
+  },
+  {
+    year: '2022',
+    lines: ['International styling symposium — participant', 'Breed presentation masterclass'],
+  },
+];
+
+const certs = ['Pet Professional Guild — certified member', 'Continuing education — coat science & skin health'];
+---
+
+<section class="competitions" id="credentials" aria-labelledby="credentials-heading">
+  <div class="competitions__inner u-container">
+    <div class="competitions__intro" data-reveal>
+      <h2 id="credentials-heading" class="competitions__title">Experience. Recognition. Dedication.</h2>
+      <p class="competitions__lede">
+        Credentials are presented quietly — the work in the coat is what matters. A concise record of competitions,
+        education, and professional memberships supports the atelier’s premium positioning.
+      </p>
+    </div>
+    <div class="competitions__wall" data-reveal>
+      {
+        plaques.map((p) => (
+          <div class="competitions__plaque">
+            <p class="competitions__year">{p.year}</p>
+            <ul>
+              {p.lines.map((line) => (
+                <li>{line}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+      <div class="competitions__plaque competitions__plaque--wide">
+        <p class="competitions__year">Certifications</p>
+        <ul>
+          {certs.map((c) => (
+            <li>{c}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/tokens' as *;
+
+  .competitions {
+    padding: clamp(4rem, 10vw, 6.5rem) 0;
+    background: linear-gradient(
+      180deg,
+      $burgundy-plaque-top 0%,
+      $burgundy 40%,
+      $burgundy-plaque-bottom 100%
+    );
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .competitions__inner {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .competitions__title {
+    font-size: clamp(2rem, 3.2vw, 2.85rem);
+    margin: 0 0 1rem;
+    max-width: 18ch;
+  }
+
+  .competitions__lede {
+    margin: 0;
+    max-width: 52ch;
+    line-height: 1.75;
+    opacity: 0.82;
+    font-size: 1rem;
+  }
+
+  .competitions__wall {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .competitions__plaque {
+    padding: 1.75rem 1.5rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .competitions__plaque:last-child {
+    border-right: none;
+  }
+
+  .competitions__plaque--wide {
+    grid-column: span 1;
+  }
+
+  .competitions__year {
+    font-family: $font-serif;
+    font-size: 2rem;
+    color: $champagne;
+    margin: 0 0 1rem;
+  }
+
+  .competitions__plaque ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .competitions__plaque li {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    opacity: 0.85;
+    padding-left: 0.85rem;
+    border-left: 2px solid rgba($champagne, 0.35);
+  }
+
+  @media (max-width: 960px) {
+    .competitions__wall {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .competitions__plaque:nth-child(2n) {
+      border-right: none;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .competitions__wall {
+      grid-template-columns: 1fr;
+    }
+
+    .competitions__plaque {
+      border-right: none;
+    }
+  }
+</style>

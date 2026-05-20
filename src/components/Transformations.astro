@@ -1,0 +1,145 @@
+---
+const items = [
+  { breed: 'Miniature Schnauzer', trim: 'Breed-standard strip & furnishings' },
+  { breed: 'Poodle', trim: 'Continental lines, refined crest' },
+  { breed: 'Yorkshire Terrier', trim: 'Silky coat, level top-line' },
+  { breed: 'Bichon Frisé', trim: 'Spherical trim, plush texture' },
+];
+---
+
+<section class="transformations" id="portfolio" aria-labelledby="transformations-heading">
+  <div class="transformations__head u-container" data-reveal>
+    <div>
+      <p class="u-eyebrow transformations__eyebrow">Transformations</p>
+      <h2 id="transformations-heading" class="transformations__title">Before &amp; after. Art in every detail.</h2>
+    </div>
+    <a class="transformations__link" href={`${import.meta.env.BASE_URL}#contact`}>View full portfolio →</a>
+  </div>
+  <div class="transformations__rail-wrap u-container">
+    <div class="transformations__rail" role="list" data-reveal>
+      {
+        items.map((item) => (
+          <article class="transformations__card" role="listitem">
+            <div class="transformations__pair" aria-label={`${item.breed} before and after`}>
+              <div class="transformations__shot transformations__shot--before">
+                <span>Before</span>
+              </div>
+              <div class="transformations__shot transformations__shot--after">
+                <span>After</span>
+              </div>
+            </div>
+            <div class="transformations__meta">
+              <p class="transformations__breed">{item.breed}</p>
+              <p class="transformations__trim">{item.trim}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/tokens' as *;
+
+  .transformations {
+    padding: clamp(4rem, 10vw, 6.5rem) 0;
+    background: $sand;
+  }
+
+  .transformations__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .transformations__eyebrow {
+    color: $burgundy;
+  }
+
+  .transformations__title {
+    margin: 0.75rem 0 0;
+    font-size: clamp(1.85rem, 3vw, 2.5rem);
+    color: $burgundy;
+    max-width: 22ch;
+  }
+
+  .transformations__link {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: $burgundy;
+    text-decoration: none;
+    border-bottom: 1px solid rgba($burgundy, 0.2);
+    padding-bottom: 0.2rem;
+    align-self: center;
+  }
+
+  .transformations__link:hover {
+    border-color: rgba($champagne, 0.95);
+  }
+
+  .transformations__rail {
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.5rem;
+    scrollbar-color: rgba($burgundy, 0.35) transparent;
+  }
+
+  .transformations__card {
+    flex: 0 0 min(380px, 82vw);
+    scroll-snap-align: start;
+    background: $ivory;
+    border: 1px solid rgba($burgundy, 0.06);
+  }
+
+  .transformations__pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: 220px;
+  }
+
+  .transformations__shot {
+    position: relative;
+    display: grid;
+    place-items: center;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: rgba($charcoal, 0.45);
+  }
+
+  .transformations__shot--before {
+    background: linear-gradient(160deg, #e8e4df, #d9d3cc);
+    border-right: 1px solid rgba($burgundy, 0.06);
+  }
+
+  .transformations__shot--after {
+    background: linear-gradient(160deg, rgba($champagne, 0.35), #f3efe8);
+  }
+
+  .transformations__meta {
+    padding: 1.25rem 1.35rem 1.5rem;
+  }
+
+  .transformations__breed {
+    margin: 0 0 0.35rem;
+    font-family: $font-serif;
+    font-size: 1.35rem;
+    color: $burgundy;
+  }
+
+  .transformations__trim {
+    margin: 0;
+    font-size: 0.92rem;
+    color: rgba($charcoal, 0.72);
+  }
+</style>
