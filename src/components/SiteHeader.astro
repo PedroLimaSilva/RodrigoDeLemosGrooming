@@ -72,11 +72,22 @@ const links = [
 
     var mq = window.matchMedia('(max-width: 1080px)');
 
+    function onPointerDownOutside(e) {
+      if (!header.classList.contains('is-menu-open') || !mq.matches) return;
+      var t = e.target;
+      if (nav.contains(t) || toggle.contains(t)) return;
+      setMenuOpen(false);
+    }
+
     function setMenuOpen(open) {
       header.classList.toggle('is-menu-open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       document.body.classList.toggle('is-header-menu-open', open && mq.matches);
+      document.removeEventListener('pointerdown', onPointerDownOutside, true);
+      if (open && mq.matches) {
+        document.addEventListener('pointerdown', onPointerDownOutside, true);
+      }
     }
 
     function closeIfDesktop() {
