@@ -7,12 +7,13 @@ interface Props {
 }
 
 const {
-  title = 'Rodrigo De Lemos — Dog Salon & Atelier',
-  description = 'Refined grooming for exceptional dogs. Boutique care, breed expertise, and a calm atelier experience in Portugal.',
+  title = "CAN D'ORO — Dog Salon & Boutique",
+  description = 'Refined grooming for exceptional dogs. Boutique care, breed expertise, and a calm salon experience in Portugal.',
 } = Astro.props;
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
-const iconHref = `${basePath}/favicon.png`;
+const faviconSvg = `${basePath}/favicon.svg`;
+const faviconPng = `${basePath}/favicon.png`;
 ---
 
 <!doctype html>
@@ -21,7 +22,9 @@ const iconHref = `${basePath}/favicon.png`;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/png" href={iconHref} />
+    <link rel="icon" type="image/svg+xml" href={faviconSvg} />
+    <link rel="icon" type="image/png" sizes="32x32" href={faviconPng} />
+    <link rel="apple-touch-icon" href={`${basePath}/apple-touch-icon.png`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

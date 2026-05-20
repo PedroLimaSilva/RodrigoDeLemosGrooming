@@ -1,8 +1,10 @@
 ---
 const base = import.meta.env.BASE_URL;
+const emblem = `${import.meta.env.BASE_URL}candoro-emblem.svg`;
 ---
 
 <section class="philosophy" id="philosophy" aria-labelledby="philosophy-heading">
+  <img class="philosophy__watermark" src={emblem} alt="" width="420" height="420" aria-hidden="true" />
   <div class="philosophy__grid u-container">
     <div class="philosophy__copy" data-reveal>
       <p class="u-eyebrow philosophy__eyebrow">Our philosophy</p>
@@ -12,7 +14,7 @@ const base = import.meta.env.BASE_URL;
         honours texture and movement. The salon is intentionally quiet: fewer dogs, longer appointments, and
         hands-on care from start to finish.
       </p>
-      <a class="philosophy__link" href={`${base}#credentials`}>Credentials &amp; recognition →</a>
+      <a class="philosophy__link" href={`${base}#philosophy`}>About CAN D'ORO →</a>
     </div>
     <figure class="philosophy__figure" data-reveal>
       <div class="philosophy__photo" role="img" aria-label="Editorial portrait placeholder for salon craftsmanship">
@@ -26,8 +28,22 @@ const base = import.meta.env.BASE_URL;
   @use '../styles/tokens' as *;
 
   .philosophy {
+    position: relative;
+    overflow: hidden;
     padding: clamp(4rem, 10vw, 7rem) 0;
     background: $ivory;
+  }
+
+  .philosophy__watermark {
+    position: absolute;
+    right: -4%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: min(28rem, 55vw);
+    height: auto;
+    opacity: 0.06;
+    pointer-events: none;
+    user-select: none;
   }
 
   .philosophy__grid {

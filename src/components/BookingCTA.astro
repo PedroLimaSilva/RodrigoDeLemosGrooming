@@ -7,13 +7,14 @@ const wa = 'https://api.whatsapp.com/send?phone=+351935871091';
     <p class="u-eyebrow booking__eyebrow">Reservations</p>
     <h2 id="booking-heading" class="booking__title">By reservation only.</h2>
     <p class="booking__lede">
-      A small calendar keeps each appointment unrushed. Reach out with your dog’s breed, coat goals, and preferred
+      We look forward to welcoming you and your companion. Reach out with your dog’s breed, coat goals, and preferred
       timing — we will respond personally.
     </p>
     <div class="booking__actions">
       <a class="booking__btn booking__btn--solid" href={wa}>Book appointment</a>
-      <a class="booking__btn booking__btn--ghost" href={wa}>WhatsApp</a>
-      <a class="booking__btn booking__btn--ghost" href="https://www.instagram.com/">Instagram</a>
+      <a class="booking__btn booking__btn--ghost" href={wa}>
+        <span class="booking__phone" aria-hidden="true">☎</span> Contact us
+      </a>
     </div>
   </div>
 </section>
@@ -91,5 +92,11 @@ const wa = 'https://api.whatsapp.com/send?phone=+351935871091';
 
   .booking__btn--ghost:hover {
     background: rgba($champagne, 0.08);
+  }
+
+  .booking__phone {
+    margin-right: 0.35rem;
+    font-size: 0.85em;
+    opacity: 0.9;
   }
 </style>

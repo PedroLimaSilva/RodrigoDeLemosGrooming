@@ -1,4 +1,6 @@
 ---
+import BrandLogo from './BrandLogo.astro';
+
 const base = import.meta.env.BASE_URL;
 const links = [
   { href: `${base}#home`, label: 'Home' },
@@ -9,12 +11,9 @@ const links = [
 ];
 ---
 
-<header class="site-header">
+<header class="site-header" data-header>
   <div class="site-header__inner u-container">
-    <a class="site-header__logo" href={`${base}#home`}>
-      <span class="site-header__logo-mark">Rodrigo De Lemos</span>
-      <span class="site-header__logo-sub">Dog Salon &amp; Atelier</span>
-    </a>
+    <BrandLogo />
     <nav class="site-header__nav" aria-label="Primary">
       <ul>
         {
@@ -30,6 +29,18 @@ const links = [
   </div>
 </header>
 
+<script is:inline>
+  (function () {
+    var header = document.querySelector('[data-header]');
+    if (!header) return;
+    var onScroll = function () {
+      header.classList.toggle('is-scrolled', window.scrollY > 48);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>
+
 <style lang="scss">
   @use '../styles/tokens' as *;
 
@@ -39,8 +50,17 @@ const links = [
     z-index: 30;
     padding: 1.35rem 0;
     color: rgba(255, 255, 255, 0.92);
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition:
+      background $duration-medium $ease-out-expo,
+      border-color $duration-medium $ease-out-expo,
+      backdrop-filter $duration-medium $ease-out-expo;
+  }
+
+  .site-header.is-scrolled {
     background: rgba($burgundy, 0.94);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(8px);
   }
 
@@ -49,35 +69,6 @@ const links = [
     align-items: center;
     gap: 2rem;
     justify-content: space-between;
-  }
-
-  .site-header__logo {
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    min-width: 12rem;
-  }
-
-  .site-header__logo:hover .site-header__logo-mark {
-    color: $champagne;
-  }
-
-  .site-header__logo-mark {
-    font-family: $font-serif;
-    font-size: 1.35rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    transition: color $duration-medium $ease-out-expo;
-  }
-
-  .site-header__logo-sub {
-    font-size: 0.65rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    opacity: 0.75;
-    font-weight: 500;
   }
 
   .site-header__nav ul {
@@ -135,7 +126,7 @@ const links = [
     }
 
     .site-header__nav ul {
-      justify-content: flex-start;
+      justify-content: flex-end;
       gap: 1.25rem;
     }
   }
