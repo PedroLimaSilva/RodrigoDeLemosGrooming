@@ -42,7 +42,7 @@ import SculptureAccent from './SculptureAccent.astro';
     color: rgba(255, 255, 255, 0.94);
     display: flex;
     flex-direction: column;
-    padding-bottom: 4rem;
+    padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
   }
 
   .hero__scroll {
