@@ -4,16 +4,30 @@ const wa = 'https://api.whatsapp.com/send?phone=+351935871091';
 
 <section class="booking" id="contact" aria-labelledby="booking-heading">
   <div class="booking__inner u-container" data-reveal>
-    <p class="u-eyebrow booking__eyebrow">Reservations</p>
-    <h2 id="booking-heading" class="booking__title">By reservation only.</h2>
+    <p class="u-eyebrow booking__eyebrow">
+      <span class="i18n-en" lang="en">Reservations</span><span class="i18n-pt" lang="pt">Reservas</span>
+    </p>
+    <h2 id="booking-heading" class="booking__title">
+      <span class="i18n-en" lang="en">By reservation only.</span><span class="i18n-pt" lang="pt"
+        >Apenas com reserva.</span
+      >
+    </h2>
     <p class="booking__lede">
-      We look forward to welcoming you and your companion. Reach out with your dog’s breed, coat goals, and preferred
-      timing — we will respond personally.
+      <span class="i18n-en" lang="en"
+        >We look forward to welcoming you and your companion. Reach out with your dog’s breed, coat goals, and preferred
+        timing — we will respond personally.</span
+      ><span class="i18n-pt" lang="pt"
+        >Esperamos receber si e o seu companheiro. Escreva com a raça do cão, objetivos de pelo e horário preferido —
+        responderemos pessoalmente.</span
+      >
     </p>
     <div class="booking__actions">
-      <a class="booking__btn booking__btn--solid" href={wa}>Book appointment</a>
+      <a class="booking__btn booking__btn--solid" href={wa}>
+        <span class="i18n-en" lang="en">Book appointment</span><span class="i18n-pt" lang="pt">Marcar visita</span>
+      </a>
       <a class="booking__btn booking__btn--ghost" href={wa}>
-        <span class="booking__phone" aria-hidden="true">☎</span> Contact us
+        <span class="booking__phone" aria-hidden="true">☎</span>
+        <span class="i18n-en" lang="en">Contact us</span><span class="i18n-pt" lang="pt">Contacte-nos</span>
       </a>
     </div>
   </div>

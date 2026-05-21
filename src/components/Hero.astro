@@ -3,20 +3,37 @@ import SculptureAccent from './SculptureAccent.astro';
 ---
 
 <section class="hero" id="home" aria-labelledby="hero-heading">
-  <div class="hero__scroll" aria-hidden="true">Scroll</div>
+  <div class="hero__scroll" aria-hidden="true">
+    <span class="i18n-en" lang="en">Scroll</span><span class="i18n-pt" lang="pt">Deslizar</span>
+  </div>
   <div class="hero__grid u-container">
     <div class="hero__copy" data-reveal>
-      <p class="u-eyebrow hero__eyebrow">Boutique care · refined results.</p>
-      <h1 id="hero-heading" class="hero__title">Refined grooming for exceptional dogs.</h1>
+      <p class="u-eyebrow hero__eyebrow">
+        <span class="i18n-en" lang="en">Boutique care · refined results.</span><span class="i18n-pt" lang="pt"
+          >Cuidado de boutique · resultados refinados.</span
+        >
+      </p>
+      <h1 id="hero-heading" class="hero__title">
+        <span class="i18n-en" lang="en">Refined grooming for exceptional dogs.</span><span class="i18n-pt" lang="pt"
+          >Estética canina refinada para cães excecionais.</span
+        >
+      </h1>
       <p class="hero__lede">
-        An atelier approach to coat health and breed presentation — quiet rooms, deliberate pacing, and
-        show-quality finishing.
+        <span class="i18n-en" lang="en"
+          >An atelier approach to coat health and breed presentation — quiet rooms, deliberate pacing, and
+          show-quality finishing.</span
+        ><span class="i18n-pt" lang="pt"
+          >Uma abordagem de atelier para a saúde do pelo e a apresentação da raça — salas silenciosas, ritmo
+          deliberado e acabamentos de nível de exposição.</span
+        >
       </p>
       <div class="hero__actions">
-        <a class="hero__btn hero__btn--solid" href="https://api.whatsapp.com/send?phone=+351935871091"
-          >Book appointment</a
-        >
-        <a class="hero__btn hero__btn--ghost" href={`${import.meta.env.BASE_URL}#services`}>Explore services</a>
+        <a class="hero__btn hero__btn--solid" href="https://api.whatsapp.com/send?phone=+351935871091">
+          <span class="i18n-en" lang="en">Book appointment</span><span class="i18n-pt" lang="pt">Marcar visita</span>
+        </a>
+        <a class="hero__btn hero__btn--ghost" href={`${import.meta.env.BASE_URL}#services`}>
+          <span class="i18n-en" lang="en">Explore services</span><span class="i18n-pt" lang="pt">Explorar serviços</span>
+        </a>
       </div>
     </div>
     <div class="hero__art" data-reveal>

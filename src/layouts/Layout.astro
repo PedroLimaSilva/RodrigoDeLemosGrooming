@@ -1,23 +1,31 @@
 ---
 import '../styles/global.scss';
+import { LOCALE_STORAGE_KEY } from '../i18n/constants';
+import { pageMeta } from '../i18n/doc';
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const {
-  title = "CAN D'ORO — Dog Salon & Boutique",
-  description = 'Refined grooming for exceptional dogs. Boutique care, breed expertise, and a calm salon experience in Portugal.',
-} = Astro.props;
+const defaultTitle = pageMeta.title.en;
+const defaultDescription = pageMeta.description.en;
+const { title = defaultTitle, description = defaultDescription } = Astro.props;
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 const faviconSvg = `${basePath}/favicon.svg`;
 const faviconPng = `${basePath}/favicon.png`;
+
+const bootstrapPayload = {
+  key: LOCALE_STORAGE_KEY,
+  title: pageMeta.title,
+  description: pageMeta.description,
+};
+const bootstrapScript = `(function(){var p=${JSON.stringify(bootstrapPayload)};var d=document;var pick=function(){try{var s=localStorage.getItem(p.key);if(s==="en"||s==="pt")return s;}catch(e){}var nav=(navigator.languages&&navigator.languages[0])||navigator.language||"en";var lo=String(nav).toLowerCase();if(lo==="pt"||lo.indexOf("pt-")===0)return"pt";return"en"};var lang=pick();d.documentElement.lang=lang;d.documentElement.setAttribute("data-site-locale",lang);d.title=p.title[lang]||p.title.en;var m=d.querySelector('meta[name="description"]');if(m)m.setAttribute("content",(p.description[lang]||p.description.en));})();`;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-locale-storage-key={LOCALE_STORAGE_KEY}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -33,9 +41,12 @@ const faviconPng = `${basePath}/favicon.png`;
       rel="stylesheet"
     />
     <title>{title}</title>
+    <script is:inline set:html={bootstrapScript}></script>
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">
+      <span class="i18n-en" lang="en">Skip to content</span><span class="i18n-pt" lang="pt">Saltar para o conteúdo</span>
+    </a>
     <slot />
     <script is:inline>
       (function () {
@@ -66,6 +77,36 @@ const faviconPng = `${basePath}/favicon.png`;
         els.forEach(function (el) {
           io.observe(el);
         });
+      })();
+    </script>
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        function storageKey() {
+          return root.getAttribute('data-locale-storage-key') || 'candoro-site-locale';
+        }
+        function applyImageAlts() {
+          var lang = root.lang === 'pt' ? 'pt' : 'en';
+          document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+            var v = el.getAttribute('data-alt-' + lang);
+            if (v != null) el.setAttribute('alt', v);
+          });
+        }
+        function wireLocalePicker() {
+          var key = storageKey();
+          document.querySelectorAll('[data-set-site-locale]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              var next = btn.getAttribute('data-set-site-locale');
+              if (next !== 'en' && next !== 'pt') return;
+              try {
+                localStorage.setItem(key, next);
+              } catch (e) {}
+              location.reload();
+            });
+          });
+        }
+        applyImageAlts();
+        wireLocalePicker();
       })();
     </script>
   </body>

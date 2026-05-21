@@ -3,23 +3,35 @@ import SculptureAccent from './SculptureAccent.astro';
 
 const services = [
   {
-    title: 'Breed styling',
-    text: 'Silhouettes and coat direction guided by breed standard and your dog’s lifestyle.',
+    title: { en: 'Breed styling', pt: 'Estética de raça' },
+    text: {
+      en: 'Silhouettes and coat direction guided by breed standard and your dog’s lifestyle.',
+      pt: 'Silhuetas e direção do pelo guiadas pelo padrão da raça e pelo estilo de vida do seu cão.',
+    },
     variant: 'brass' as const,
   },
   {
-    title: 'Puppy introduction',
-    text: 'Gentle first visits that build trust, table confidence, and healthy coat routines.',
+    title: { en: 'Puppy introduction', pt: 'Introdução de cachorro' },
+    text: {
+      en: 'Gentle first visits that build trust, table confidence, and healthy coat routines.',
+      pt: 'Primeiras visitas suaves que constroem confiança, segurança na mesa e rotinas saudáveis de pelo.',
+    },
     variant: 'porcelain' as const,
   },
   {
-    title: 'Hand stripping',
-    text: 'Terriers and wired coats finished with traditional techniques for correct texture.',
+    title: { en: 'Hand stripping', pt: 'Stripping manual' },
+    text: {
+      en: 'Terriers and wired coats finished with traditional techniques for correct texture.',
+      pt: 'Terriers e pelos duros finalizados com técnicas tradicionais para a textura correta.',
+    },
     variant: 'marble' as const,
   },
   {
-    title: 'Spa & coat care',
-    text: 'Conditioning baths, skin-supporting products, and detail work for show-ready shine.',
+    title: { en: 'Spa & coat care', pt: 'Spa e cuidado do pelo' },
+    text: {
+      en: 'Conditioning baths, skin-supporting products, and detail work for show-ready shine.',
+      pt: 'Banhos de condicionamento, produtos que apoiam a pele e detalhe para um brilho pronto para exposição.',
+    },
     variant: 'resin' as const,
   },
 ];
@@ -27,8 +39,14 @@ const services = [
 
 <section class="services" id="services" aria-labelledby="services-heading">
   <div class="services__head u-container" data-reveal>
-    <p class="u-eyebrow services__eyebrow">Signature services</p>
-    <h2 id="services-heading" class="services__title">Tailored care for every dog.</h2>
+    <p class="u-eyebrow services__eyebrow">
+      <span class="i18n-en" lang="en">Signature services</span><span class="i18n-pt" lang="pt">Serviços de assinatura</span>
+    </p>
+    <h2 id="services-heading" class="services__title">
+      <span class="i18n-en" lang="en">Tailored care for every dog.</span><span class="i18n-pt" lang="pt"
+        >Cuidado sob medida para cada cão.</span
+      >
+    </h2>
   </div>
   <div class="services__grid u-container">
     {
@@ -37,10 +55,16 @@ const services = [
           <div class="services__mascot">
             <SculptureAccent variant={s.variant} />
           </div>
-          <h3 class="services__name">{s.title}</h3>
-          <p class="services__text">{s.text}</p>
+          <h3 class="services__name">
+            <span class="i18n-en" lang="en">{s.title.en}</span>
+            <span class="i18n-pt" lang="pt">{s.title.pt}</span>
+          </h3>
+          <p class="services__text">
+            <span class="i18n-en" lang="en">{s.text.en}</span>
+            <span class="i18n-pt" lang="pt">{s.text.pt}</span>
+          </p>
           <a class="services__more" href={`${import.meta.env.BASE_URL}#contact`}>
-            Learn more →
+            <span class="i18n-en" lang="en">Learn more →</span><span class="i18n-pt" lang="pt">Saber mais →</span>
           </a>
         </article>
       ))

@@ -7,18 +7,43 @@ const emblem = `${import.meta.env.BASE_URL}candoro-emblem.svg`;
   <img class="philosophy__watermark" src={emblem} alt="" width="420" height="420" aria-hidden="true" />
   <div class="philosophy__grid u-container">
     <div class="philosophy__copy" data-reveal>
-      <p class="u-eyebrow philosophy__eyebrow">Our philosophy</p>
-      <h2 id="philosophy-heading" class="philosophy__title">Grooming is more than a service. It is craftsmanship.</h2>
-      <p class="philosophy__body">
-        Each session is paced for calm focus — individualized coat plans, breed-aware lines, and finishing that
-        honours texture and movement. The salon is intentionally quiet: fewer dogs, longer appointments, and
-        hands-on care from start to finish.
+      <p class="u-eyebrow philosophy__eyebrow">
+        <span class="i18n-en" lang="en">Our philosophy</span><span class="i18n-pt" lang="pt">A nossa filosofia</span>
       </p>
-      <a class="philosophy__link" href={`${base}#philosophy`}>About CAN D'ORO →</a>
+      <h2 id="philosophy-heading" class="philosophy__title">
+        <span class="i18n-en" lang="en">Grooming is more than a service. It is craftsmanship.</span><span
+          class="i18n-pt"
+          lang="pt">A estética é mais do que um serviço. É ofício.</span
+        >
+      </h2>
+      <p class="philosophy__body">
+        <span class="i18n-en" lang="en"
+          >Each session is paced for calm focus — individualized coat plans, breed-aware lines, and finishing that
+          honours texture and movement. The salon is intentionally quiet: fewer dogs, longer appointments, and
+          hands-on care from start to finish.</span
+        ><span class="i18n-pt" lang="pt"
+          >Cada sessão é ritmada para um foco sereno — planos de pelo individualizados, linhas conscientes da raça e
+          acabamentos que respeitam textura e movimento. O salão é propositadamente calmo: menos cães, mais tempo de
+          marcação e cuidado manual do princípio ao fim.</span
+        >
+      </p>
+      <a class="philosophy__link" href={`${base}#philosophy`}>
+        <span class="i18n-en" lang="en">About CAN D'ORO →</span><span class="i18n-pt" lang="pt">Sobre a CAN D'ORO →</span>
+      </a>
     </div>
     <figure class="philosophy__figure" data-reveal>
-      <div class="philosophy__photo" role="img" aria-label="Editorial portrait placeholder for salon craftsmanship">
-        <span class="philosophy__photo-cap">Photography: craftsmanship &amp; coat detail</span>
+      <div class="philosophy__photo" role="img" aria-labelledby="philosophy-photo-label">
+        <span id="philosophy-photo-label" class="visually-hidden">
+          <span class="i18n-en" lang="en">Editorial portrait placeholder for salon craftsmanship</span><span
+            class="i18n-pt"
+            lang="pt">Retrato editorial de referência para o ofício do salão</span
+          >
+        </span>
+        <span class="philosophy__photo-cap">
+          <span class="i18n-en" lang="en">Photography: craftsmanship &amp; coat detail</span><span class="i18n-pt" lang="pt"
+            >Fotografia: ofício e detalhe do pelo</span
+          >
+        </span>
       </div>
     </figure>
   </div>
@@ -26,6 +51,18 @@ const emblem = `${import.meta.env.BASE_URL}candoro-emblem.svg`;
 
 <style lang="scss">
   @use '../styles/tokens' as *;
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
   .philosophy {
     position: relative;

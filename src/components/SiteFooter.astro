@@ -11,36 +11,76 @@ const wa = 'https://api.whatsapp.com/send?phone=+351935871091';
     <BrandLogo variant="footer" />
     <div class="site-footer__cols">
       <div>
-        <p class="site-footer__heading">Menu</p>
+        <p class="site-footer__heading">
+          <span class="i18n-en" lang="en">Menu</span><span class="i18n-pt" lang="pt">Menu</span>
+        </p>
         <ul>
-          <li><a href={`${base}#home`}>Home</a></li>
-          <li><a href={`${base}#services`}>Services</a></li>
-          <li><a href={`${base}#portfolio`}>Portfolio</a></li>
-          <li><a href={`${base}#philosophy`}>About</a></li>
-          <li><a href={`${base}#contact`}>Contact</a></li>
+          <li>
+            <a href={`${base}#home`}>
+              <span class="i18n-en" lang="en">Home</span><span class="i18n-pt" lang="pt">Início</span>
+            </a>
+          </li>
+          <li>
+            <a href={`${base}#services`}>
+              <span class="i18n-en" lang="en">Services</span><span class="i18n-pt" lang="pt">Serviços</span>
+            </a>
+          </li>
+          <li>
+            <a href={`${base}#portfolio`}>
+              <span class="i18n-en" lang="en">Portfolio</span><span class="i18n-pt" lang="pt">Portfólio</span>
+            </a>
+          </li>
+          <li>
+            <a href={`${base}#philosophy`}>
+              <span class="i18n-en" lang="en">About</span><span class="i18n-pt" lang="pt">Sobre</span>
+            </a>
+          </li>
+          <li>
+            <a href={`${base}#contact`}>
+              <span class="i18n-en" lang="en">Contact</span><span class="i18n-pt" lang="pt">Contacto</span>
+            </a>
+          </li>
         </ul>
       </div>
       <div>
-        <p class="site-footer__heading">Info</p>
-        <p class="site-footer__text">By appointment only.</p>
+        <p class="site-footer__heading">
+          <span class="i18n-en" lang="en">Info</span><span class="i18n-pt" lang="pt">Informações</span>
+        </p>
+        <p class="site-footer__text">
+          <span class="i18n-en" lang="en">By appointment only.</span><span class="i18n-pt" lang="pt">Apenas com marcação.</span>
+        </p>
         <p class="site-footer__text">
           <a href={wa}>+351 935 871 091</a>
         </p>
       </div>
       <div>
-        <p class="site-footer__heading">Follow</p>
+        <p class="site-footer__heading">
+          <span class="i18n-en" lang="en">Follow</span><span class="i18n-pt" lang="pt">Seguir</span>
+        </p>
         <ul class="site-footer__social">
           <li>
-            <a href="https://www.instagram.com/" aria-label="Instagram">Instagram</a>
+            <a href="https://www.instagram.com/" aria-label="Instagram">
+              <span class="i18n-en" lang="en">Instagram</span><span class="i18n-pt" lang="pt">Instagram</span>
+            </a>
           </li>
           <li>
-            <a href="https://www.facebook.com/" aria-label="Facebook">Facebook</a>
+            <a href="https://www.facebook.com/" aria-label="Facebook">
+              <span class="i18n-en" lang="en">Facebook</span><span class="i18n-pt" lang="pt">Facebook</span>
+            </a>
           </li>
         </ul>
       </div>
     </div>
   </div>
-  <p class="site-footer__legal u-container">© {year} CAN D'ORO. All rights reserved.</p>
+  <p class="site-footer__legal u-container">
+    <span class="i18n-en" lang="en">© {year} CAN D'ORO. All rights reserved.</span>
+    <span class="i18n-pt" lang="pt">© {year} CAN D'ORO. Todos os direitos reservados.</span>
+  </p>
+  <p class="site-footer__lang u-container">
+    <button type="button" class="site-footer__lang-link" data-set-site-locale="en">English</button>
+    <span class="site-footer__lang-sep" aria-hidden="true"> · </span>
+    <button type="button" class="site-footer__lang-link" data-set-site-locale="pt">Português</button>
+  </p>
 </footer>
 
 <style lang="scss">
@@ -111,6 +151,36 @@ const wa = 'https://api.whatsapp.com/send?phone=+351935871091';
     font-size: 0.8rem;
     opacity: 0.45;
     text-align: center;
+  }
+
+  .site-footer__lang {
+    margin: 0.85rem auto 0;
+    font-size: 0.8rem;
+    opacity: 0.55;
+    text-align: center;
+  }
+
+  .site-footer__lang-link {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  .site-footer__lang-link:hover {
+    color: $champagne;
+    text-decoration: none;
+  }
+
+  .site-footer__lang-sep {
+    opacity: 0.65;
   }
 
   @media (max-width: 800px) {
