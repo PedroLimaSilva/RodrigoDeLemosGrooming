@@ -8,6 +8,7 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: $ivory;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -86,4 +87,8 @@ h4 {
     transform: none;
     transition: none;
   }
+}
+
+body.is-header-menu-open {
+  overflow: hidden;
 }
