@@ -8,13 +8,14 @@
     "build": "astro build",
     "preview": "astro preview",
     "test": "playwright test",
+    "test:update-snapshots": "docker run --rm -v \"$(pwd)\":/work -w /work mcr.microsoft.com/playwright:v1.60.0-noble sh -c \"npm ci && npx playwright test --update-snapshots\"",
     "deploy": "npm run build && npx gh-pages -d dist"
   },
   "repository": "git@github.com:PedroLimaSilva/RodrigoDeLemosGrooming.git",
   "author": "Pedro Lima e Silva <pedrocaslsilva403@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@playwright/test": "^1.50.0",
+    "@playwright/test": "1.60.0",
     "astro": "^5.7.0",
     "gh-pages": "^6.3.0",
     "sass": "^1.86.0",
