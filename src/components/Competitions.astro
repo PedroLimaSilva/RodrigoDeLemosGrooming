@@ -2,28 +2,73 @@
 const plaques = [
   {
     year: '2024',
-    lines: ['National grooming showcase — merit award', 'Advanced coat finishing clinic'],
+    lines: {
+      en: [
+        'National grooming showcase — merit award',
+        'Advanced coat finishing clinic',
+      ],
+      pt: [
+        'Mostra nacional de grooming — menção honrosa',
+        'Clínica avançada de acabamento de pelo',
+      ],
+    },
   },
   {
     year: '2023',
-    lines: ['Terrier specialist workshop — guest demonstrator', 'Salon excellence — client care citation'],
+    lines: {
+      en: [
+        'Terrier specialist workshop — guest demonstrator',
+        'Salon excellence — client care citation',
+      ],
+      pt: [
+        'Workshop de especialista em terriers — demonstrador convidado',
+        'Excelência de salão — menção ao cuidado ao cliente',
+      ],
+    },
   },
   {
     year: '2022',
-    lines: ['International styling symposium — participant', 'Breed presentation masterclass'],
+    lines: {
+      en: [
+        'International styling symposium — participant',
+        'Breed presentation masterclass',
+      ],
+      pt: [
+        'Simpósio internacional de styling — participante',
+        'Masterclass de apresentação de raça',
+      ],
+    },
   },
 ];
 
-const certs = ['Pet Professional Guild — certified member', 'Continuing education — coat science & skin health'];
+const certs = {
+  en: [
+    'Pet Professional Guild — certified member',
+    'Continuing education — coat science & skin health',
+  ],
+  pt: [
+    'Pet Professional Guild — membro certificado',
+    'Formação contínua — ciência do pelo e saúde da pele',
+  ],
+};
 ---
 
 <section class="competitions" id="credentials" aria-labelledby="credentials-heading">
   <div class="competitions__inner u-container">
     <div class="competitions__intro" data-reveal>
-      <h2 id="credentials-heading" class="competitions__title">Experience. Recognition. Dedication.</h2>
+      <h2 id="credentials-heading" class="competitions__title">
+        <span class="i18n-en" lang="en">Experience. Recognition. Dedication.</span><span class="i18n-pt" lang="pt"
+          >Experiência. Reconhecimento. Dedicação.</span
+        >
+      </h2>
       <p class="competitions__lede">
-        Credentials are presented quietly — the work in the coat is what matters. A concise record of competitions,
-        education, and professional memberships supports the atelier’s premium positioning.
+        <span class="i18n-en" lang="en"
+          >Credentials are presented quietly — the work in the coat is what matters. A concise record of competitions,
+          education, and professional memberships supports the atelier’s premium positioning.</span
+        ><span class="i18n-pt" lang="pt"
+          >As credenciais apresentam-se com sobriedade — o que importa é o trabalho no pelo. Um registo conciso de
+          competições, formação e filiações profissionais reforça o posicionamento premium do atelier.</span
+        >
       </p>
     </div>
     <div class="competitions__wall" data-reveal>
@@ -32,18 +77,26 @@ const certs = ['Pet Professional Guild — certified member', 'Continuing educat
           <div class="competitions__plaque">
             <p class="competitions__year">{p.year}</p>
             <ul>
-              {p.lines.map((line) => (
-                <li>{line}</li>
+              {p.lines.en.map((line, i) => (
+                <li>
+                  <span class="i18n-en" lang="en">{line}</span>
+                  <span class="i18n-pt" lang="pt">{p.lines.pt[i]}</span>
+                </li>
               ))}
             </ul>
           </div>
         ))
       }
       <div class="competitions__plaque competitions__plaque--wide">
-        <p class="competitions__year">Certifications</p>
+        <p class="competitions__year">
+          <span class="i18n-en" lang="en">Certifications</span><span class="i18n-pt" lang="pt">Certificações</span>
+        </p>
         <ul>
-          {certs.map((c) => (
-            <li>{c}</li>
+          {certs.en.map((c, i) => (
+            <li>
+              <span class="i18n-en" lang="en">{c}</span>
+              <span class="i18n-pt" lang="pt">{certs.pt[i]}</span>
+            </li>
           ))}
         </ul>
       </div>

@@ -17,6 +17,7 @@ Static marketing site for **CAN D'ORO — Dog Salon & Boutique**: refined groomi
 | `npm run build`| Production build to `dist/`. |
 | `npm run preview` | Serve the production build locally. |
 | `npm test`     | Run [Playwright](https://playwright.dev/) visual regression tests. |
+| `npm run test:update-snapshots` | Refresh `*-linux.png` baselines in Docker (same environment as GitHub Actions). Requires [Docker](https://www.docker.com/). |
 | `npm run deploy` | Build then publish `dist/` with [gh-pages](https://github.com/tschaub/gh-pages) (requires GitHub Pages setup and permissions). |
 
 ## GitHub Pages and `base` path
@@ -25,13 +26,29 @@ Static marketing site for **CAN D'ORO — Dog Salon & Boutique**: refined groomi
 
 ## Tests
 
-Tests live under [`tests/`](tests/). They use full-page screenshots with `prefers-reduced-motion: reduce` so reveal animations do not affect snapshots. First run or after intentional UI changes may require updating snapshots (see Playwright docs for `--update-snapshots`).
+Tests live under [`tests/`](tests/). They use full-page screenshots with `prefers-reduced-motion: reduce` so reveal animations do not affect snapshots. Baselines are committed under [`tests/test.test.ts-snapshots/`](tests/test.test.ts-snapshots/).
 
 Install browsers once if needed:
 
 ```bash
-npx playwright install
+npx playwright install chromium
 ```
+
+### Updating snapshots
+
+GitHub Actions runs tests on **Ubuntu** and compares against `*-linux.png` files. `npm run test:update-snapshots` always runs Playwright inside Docker so baselines match CI, even on macOS.
+
+After intentional UI changes:
+
+```bash
+npm run test:update-snapshots
+```
+
+Then commit the updated `*-linux.png` files under `tests/test.test.ts-snapshots/`.
+
+The script uses `mcr.microsoft.com/playwright:v1.60.0-noble`. Keep that tag in sync with `@playwright/test` in [`package.json`](package.json) when you upgrade Playwright.
+
+[`playwright.config.ts`](playwright.config.ts) sets `updateSnapshots: 'missing'`, so a normal `npm test` only creates missing baselines; use `test:update-snapshots` when the UI has changed.
 
 ## Project layout
 

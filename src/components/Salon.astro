@@ -1,19 +1,42 @@
 ---
 const tiles = [
-  { label: 'Reception — calm arrival, warm light' },
-  { label: 'Grooming hall — precision tables & air quality' },
-  { label: 'Portrait wall — celebrated clients' },
-  { label: 'Boutique shelf — curated coat care' },
+  {
+    en: 'Reception — calm arrival, warm light',
+    pt: 'Receção — chegada calma, luz quente',
+  },
+  {
+    en: 'Grooming hall — precision tables & air quality',
+    pt: 'Sala de estética — mesas de precisão e qualidade do ar',
+  },
+  {
+    en: 'Portrait wall — celebrated clients',
+    pt: 'Parede de retratos — clientes celebrados',
+  },
+  {
+    en: 'Boutique shelf — curated coat care',
+    pt: 'Prateleira boutique — cuidado de pelo curado',
+  },
 ];
 ---
 
 <section class="salon" id="salon" aria-labelledby="salon-heading">
   <div class="salon__head u-container" data-reveal>
-    <p class="u-eyebrow salon__eyebrow">The atelier</p>
-    <h2 id="salon-heading" class="salon__title">A quiet salon, built for focus.</h2>
+    <p class="u-eyebrow salon__eyebrow">
+      <span class="i18n-en" lang="en">The atelier</span><span class="i18n-pt" lang="pt">O atelier</span>
+    </p>
+    <h2 id="salon-heading" class="salon__title">
+      <span class="i18n-en" lang="en">A quiet salon, built for focus.</span><span class="i18n-pt" lang="pt"
+        >Um salão silencioso, pensado para o foco.</span
+      >
+    </h2>
     <p class="salon__lede">
-      Materials, lighting, and acoustics are chosen to keep dogs relaxed. The environment should read as clearly as
-      the grooming: intentional, understated, and immaculate.
+      <span class="i18n-en" lang="en"
+        >Materials, lighting, and acoustics are chosen to keep dogs relaxed. The environment should read as clearly as
+        the grooming: intentional, understated, and immaculate.</span
+      ><span class="i18n-pt" lang="pt"
+        >Materiais, luz e acústica são escolhidos para manter os cães descontraídos. O ambiente deve ser tão claro
+        quanto a estética: intencional, discreto e imaculado.</span
+      >
     </p>
   </div>
   <div class="salon__grid u-container" data-reveal>
@@ -21,7 +44,10 @@ const tiles = [
       tiles.map((t) => (
         <figure class="salon__tile">
           <div class="salon__photo" role="presentation" />
-          <figcaption class="salon__cap">{t.label}</figcaption>
+          <figcaption class="salon__cap">
+            <span class="i18n-en" lang="en">{t.en}</span>
+            <span class="i18n-pt" lang="pt">{t.pt}</span>
+          </figcaption>
         </figure>
       ))
     }

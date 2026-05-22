@@ -3,28 +3,35 @@ import BrandLogo from './BrandLogo.astro';
 
 const base = import.meta.env.BASE_URL;
 const links = [
-  { href: `${base}#home`, label: 'Home' },
-  { href: `${base}#services`, label: 'Services' },
-  { href: `${base}#portfolio`, label: 'Portfolio' },
-  { href: `${base}#philosophy`, label: 'About' },
-  { href: `${base}#contact`, label: 'Contact' },
+  { href: `${base}#home`, en: 'Home', pt: 'Início' },
+  { href: `${base}#services`, en: 'Services', pt: 'Serviços' },
+  { href: `${base}#portfolio`, en: 'Portfolio', pt: 'Portfólio' },
+  { href: `${base}#philosophy`, en: 'About', pt: 'Sobre' },
+  { href: `${base}#contact`, en: 'Contact', pt: 'Contacto' },
 ];
 ---
 
 <header class="site-header" data-header>
   <div class="site-header__inner u-container">
     <BrandLogo />
+    <span id="site-header-nav-label" class="visually-hidden">
+      <span class="i18n-en" lang="en">Primary</span>
+      <span class="i18n-pt" lang="pt">Principal</span>
+    </span>
     <nav
       class="site-header__nav"
       id="site-header-primary-nav"
       data-header-nav
-      aria-label="Primary"
+      aria-labelledby="site-header-nav-label"
     >
       <ul>
         {
-          links.map(({ href, label }) => (
+          links.map(({ href, en, pt }) => (
             <li>
-              <a href={href}>{label}</a>
+              <a href={href}>
+                <span class="i18n-en" lang="en">{en}</span>
+                <span class="i18n-pt" lang="pt">{pt}</span>
+              </a>
             </li>
           ))
         }
@@ -33,10 +40,13 @@ const links = [
     <a
       class="site-header__book"
       href="https://api.whatsapp.com/send?phone=+351935871091"
-      aria-label="Book appointment"
     >
-      <span class="site-header__book-label">Book appointment</span>
-      <span class="site-header__book-label site-header__book-label--short" aria-hidden="true">Book</span>
+      <span class="site-header__book-label">
+        <span class="i18n-en" lang="en">Book appointment</span><span class="i18n-pt" lang="pt">Marcar visita</span>
+      </span>
+      <span class="site-header__book-label site-header__book-label--short" aria-hidden="true">
+        <span class="i18n-en" lang="en">Book</span><span class="i18n-pt" lang="pt">Marcar</span>
+      </span>
     </a>
     <button
       class="site-header__menu-toggle"
@@ -60,6 +70,12 @@ const links = [
     var header = document.querySelector('[data-header]');
     if (!header) return;
 
+    function menuAria() {
+      return document.documentElement.lang === 'pt'
+        ? { open: 'Abrir menu', close: 'Fechar menu' }
+        : { open: 'Open menu', close: 'Close menu' };
+    }
+
     var onScroll = function () {
       header.classList.toggle('is-scrolled', window.scrollY > 48);
     };
@@ -69,6 +85,8 @@ const links = [
     var toggle = header.querySelector('[data-header-menu-toggle]');
     var nav = header.querySelector('[data-header-nav]');
     if (!toggle || !nav) return;
+
+    toggle.setAttribute('aria-label', menuAria().open);
 
     var mq = window.matchMedia('(max-width: 1080px)');
 
@@ -82,7 +100,8 @@ const links = [
     function setMenuOpen(open) {
       header.classList.toggle('is-menu-open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      var labels = menuAria();
+      toggle.setAttribute('aria-label', open ? labels.close : labels.open);
       document.body.classList.toggle('is-header-menu-open', open && mq.matches);
       document.removeEventListener('pointerdown', onPointerDownOutside, true);
       if (open && mq.matches) {
@@ -118,6 +137,18 @@ const links = [
 
 <style lang="scss">
   @use '../styles/tokens' as *;
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
   $nav-collapse-bp: 1080px;
 

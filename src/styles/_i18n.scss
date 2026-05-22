@@ -1,0 +1,8 @@
+/* Bilingual blocks: show one language based on <html lang="en|pt"> (set before first paint). */
+html[lang='pt'] .i18n-en {
+  display: none !important;
+}
+
+html[lang='en'] .i18n-pt {
+  display: none !important;
+}
