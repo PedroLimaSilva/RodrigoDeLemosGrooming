@@ -2,8 +2,13 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   expect: {
-    toHaveScreenshot: { maxDiffPixels: 0 },
+    toHaveScreenshot: {
+      // Full-page captures include text anti-aliasing; allow tiny drift so Linux CI
+      // matches developer machines while still catching layout and content regressions.
+      maxDiffPixelRatio: 0.002,
+    },
   },
+  updateSnapshots: 'missing',
   projects: [
     {
       name: 'chromium',
@@ -24,7 +29,6 @@ export default defineConfig({
       },
     },
   ],
-  updateSnapshots: 'missing',
   webServer: {
     command: 'npm run build && npm run preview -- --host 127.0.0.1',
     port: 4321,
