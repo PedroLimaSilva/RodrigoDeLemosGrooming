@@ -5,11 +5,11 @@ export const pageMeta: {
   description: Record<SiteLocale, string>;
 } = {
   title: {
-    en: "CAN D'ORO — Dog Salon & Boutique",
-    pt: "CAN D'ORO — Salão canino e boutique",
+    en: "CAN D'ORO — Dog Groomer in Lisbon | Boutique Dog Salon",
+    pt: "CAN D'ORO — Estética Canina em Lisboa | Salão Canino",
   },
   description: {
-    en: 'Refined grooming for exceptional dogs. Boutique care, breed expertise, and a calm salon experience in Portugal.',
-    pt: 'Estética canina refinada para cães excecionais. Cuidado de boutique, domínio de raças e uma experiência de salão serena em Portugal.',
+    en: 'Dog grooming in Lisbon at a boutique salon. Breed styling, refined care, and a calm experience — by appointment.',
+    pt: 'Estética canina em Lisboa num salão boutique. Estética de raça, cuidado refinado e ambiente sereno — com marcação.',
   },
 };

@@ -1,16 +1,25 @@
 ---
 import '../styles/global.scss';
-import { LOCALE_STORAGE_KEY } from '../i18n/constants';
+import SeoHead from '../components/SeoHead.astro';
+import { LOCALE_STORAGE_KEY, type SiteLocale } from '../i18n/constants';
 import { pageMeta } from '../i18n/doc';
+import { localePath } from '../i18n/seo';
 
 interface Props {
   title?: string;
   description?: string;
+  locale?: SiteLocale;
+  path?: string;
 }
 
-const defaultTitle = pageMeta.title.en;
-const defaultDescription = pageMeta.description.en;
-const { title = defaultTitle, description = defaultDescription } = Astro.props;
+const defaultLocale: SiteLocale = 'en';
+const defaultPath = localePath(defaultLocale);
+const {
+  locale = defaultLocale,
+  path = defaultPath,
+  title = pageMeta.title[locale],
+  description = pageMeta.description[locale],
+} = Astro.props;
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 const faviconSvg = `${basePath}/favicon.svg`;
@@ -20,17 +29,18 @@ const bootstrapPayload = {
   key: LOCALE_STORAGE_KEY,
   title: pageMeta.title,
   description: pageMeta.description,
+  serverLocale: locale,
 };
-const bootstrapScript = `(function(){var p=${JSON.stringify(bootstrapPayload)};var d=document;var pick=function(){try{var s=localStorage.getItem(p.key);if(s==="en"||s==="pt")return s;}catch(e){}var nav=(navigator.languages&&navigator.languages[0])||navigator.language||"en";var lo=String(nav).toLowerCase();if(lo==="pt"||lo.indexOf("pt-")===0)return"pt";return"en"};var lang=pick();d.documentElement.lang=lang;d.documentElement.setAttribute("data-site-locale",lang);d.title=p.title[lang]||p.title.en;var m=d.querySelector('meta[name="description"]');if(m)m.setAttribute("content",(p.description[lang]||p.description.en));})();`;
+const bootstrapScript = `(function(){var p=${JSON.stringify(bootstrapPayload)};var d=document;var pick=function(){if(p.serverLocale==="en"||p.serverLocale==="pt")return p.serverLocale;try{var s=localStorage.getItem(p.key);if(s==="en"||s==="pt")return s;}catch(e){}var nav=(navigator.languages&&navigator.languages[0])||navigator.language||"en";var lo=String(nav).toLowerCase();if(lo==="pt"||lo.indexOf("pt-")===0)return"pt";return"en"};var lang=pick();d.documentElement.lang=lang;d.documentElement.setAttribute("data-site-locale",lang);if(p.serverLocale!=="en"&&p.serverLocale!=="pt"){d.title=p.title[lang]||p.title.en;var m=d.querySelector('meta[name="description"]');if(m)m.setAttribute("content",(p.description[lang]||p.description.en));}})();`;
 ---
 
 <!doctype html>
-<html lang="en" data-locale-storage-key={LOCALE_STORAGE_KEY}>
+<html lang={locale} data-locale-storage-key={LOCALE_STORAGE_KEY}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#840029" />
-    <meta name="description" content={description} />
+    <SeoHead locale={locale} title={title} description={description} path={path} />
     <link rel="icon" type="image/svg+xml" href={faviconSvg} />
     <link rel="icon" type="image/png" sizes="32x32" href={faviconPng} />
     <link rel="apple-touch-icon" href={`${basePath}/apple-touch-icon.png`} />
@@ -40,7 +50,6 @@ const bootstrapScript = `(function(){var p=${JSON.stringify(bootstrapPayload)};v
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>{title}</title>
     <script is:inline set:html={bootstrapScript}></script>
   </head>
   <body>
