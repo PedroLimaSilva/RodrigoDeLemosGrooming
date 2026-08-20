@@ -17,7 +17,7 @@ interface Props {
 const { locale, title, description, path } = Astro.props;
 
 const canonical = absoluteUrl(path);
-const alternates = alternateUrls(path);
+const alternates = alternateUrls();
 const ogLocale = locale === 'pt' ? 'pt_PT' : 'en_GB';
 const ogLocaleAlternate = locale === 'pt' ? 'en_GB' : 'pt_PT';
 ---

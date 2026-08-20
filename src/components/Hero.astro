@@ -1,5 +1,8 @@
 ---
 import SculptureAccent from './SculptureAccent.astro';
+import { localeFromUrl, localePath } from '../i18n/seo';
+
+const locale = localeFromUrl(Astro.url.pathname);
 ---
 
 <section class="hero" id="home" aria-labelledby="hero-heading">
@@ -31,7 +34,7 @@ import SculptureAccent from './SculptureAccent.astro';
         <a class="hero__btn hero__btn--solid" href="https://api.whatsapp.com/send?phone=+351935871091">
           <span class="i18n-en" lang="en">Book appointment</span><span class="i18n-pt" lang="pt">Marcar visita</span>
         </a>
-        <a class="hero__btn hero__btn--ghost" href={`${import.meta.env.BASE_URL}#services`}>
+        <a class="hero__btn hero__btn--ghost" href={localePath(locale, '#services')}>
           <span class="i18n-en" lang="en">Explore services</span><span class="i18n-pt" lang="pt">Explorar serviços</span>
         </a>
       </div>

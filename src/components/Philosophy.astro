@@ -1,5 +1,7 @@
 ---
-const base = import.meta.env.BASE_URL;
+import { localeFromUrl, localePath } from '../i18n/seo';
+
+const locale = localeFromUrl(Astro.url.pathname);
 const emblem = `${import.meta.env.BASE_URL}candoro-emblem.svg`;
 ---
 
@@ -27,7 +29,7 @@ const emblem = `${import.meta.env.BASE_URL}candoro-emblem.svg`;
           marcação e cuidado manual do princípio ao fim.</span
         >
       </p>
-      <a class="philosophy__link" href={`${base}#philosophy`}>
+      <a class="philosophy__link" href={localePath(locale, '#philosophy')}>
         <span class="i18n-en" lang="en">About CAN D'ORO →</span><span class="i18n-pt" lang="pt">Sobre a CAN D'ORO →</span>
       </a>
     </div>

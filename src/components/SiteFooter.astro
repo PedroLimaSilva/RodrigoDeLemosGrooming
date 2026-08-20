@@ -1,7 +1,8 @@
 ---
 import BrandLogo from './BrandLogo.astro';
+import { localeFromUrl, localePath } from '../i18n/seo';
 
-const base = import.meta.env.BASE_URL;
+const locale = localeFromUrl(Astro.url.pathname);
 const year = new Date().getFullYear();
 const wa = 'https://api.whatsapp.com/send?phone=+351935871091';
 const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=CAN+D%27ORO+Lisboa';
@@ -17,27 +18,27 @@ const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=CAN+D%27ORO+Lis
         </p>
         <ul>
           <li>
-            <a href={`${base}#home`}>
+            <a href={localePath(locale, '#home')}>
               <span class="i18n-en" lang="en">Home</span><span class="i18n-pt" lang="pt">Início</span>
             </a>
           </li>
           <li>
-            <a href={`${base}#services`}>
+            <a href={localePath(locale, '#services')}>
               <span class="i18n-en" lang="en">Services</span><span class="i18n-pt" lang="pt">Serviços</span>
             </a>
           </li>
           <li>
-            <a href={`${base}#portfolio`}>
+            <a href={localePath(locale, '#portfolio')}>
               <span class="i18n-en" lang="en">Portfolio</span><span class="i18n-pt" lang="pt">Portfólio</span>
             </a>
           </li>
           <li>
-            <a href={`${base}#philosophy`}>
+            <a href={localePath(locale, '#philosophy')}>
               <span class="i18n-en" lang="en">About</span><span class="i18n-pt" lang="pt">Sobre</span>
             </a>
           </li>
           <li>
-            <a href={`${base}#contact`}>
+            <a href={localePath(locale, '#contact')}>
               <span class="i18n-en" lang="en">Contact</span><span class="i18n-pt" lang="pt">Contacto</span>
             </a>
           </li>
@@ -83,9 +84,25 @@ const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=CAN+D%27ORO+Lis
     <span class="i18n-pt" lang="pt">© {year} CAN D'ORO. Todos os direitos reservados.</span>
   </p>
   <p class="site-footer__lang u-container">
-    <button type="button" class="site-footer__lang-link" data-set-site-locale="en">English</button>
+    <a
+      class="site-footer__lang-link"
+      href={localePath('en')}
+      hreflang="en"
+      lang="en"
+      aria-current={locale === 'en' ? 'page' : undefined}
+    >
+      English
+    </a>
     <span class="site-footer__lang-sep" aria-hidden="true"> · </span>
-    <button type="button" class="site-footer__lang-link" data-set-site-locale="pt">Português</button>
+    <a
+      class="site-footer__lang-link"
+      href={localePath('pt')}
+      hreflang="pt"
+      lang="pt"
+      aria-current={locale === 'pt' ? 'page' : undefined}
+    >
+      Português
+    </a>
   </p>
 </footer>
 
@@ -183,6 +200,12 @@ const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=CAN+D%27ORO+Lis
   .site-footer__lang-link:hover {
     color: $champagne;
     text-decoration: none;
+  }
+
+  .site-footer__lang-link[aria-current='page'] {
+    color: $champagne;
+    text-decoration: none;
+    font-weight: 600;
   }
 
   .site-footer__lang-sep {

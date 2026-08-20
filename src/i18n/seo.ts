@@ -27,8 +27,42 @@ export const BUSINESS = {
   areaServed: ['Lisboa', 'Lisbon', 'Portugal'],
 } as const;
 
-export function localePath(locale: SiteLocale): string {
-  return locale === 'pt' ? '/pt/' : '/en/';
+function siteRoot(): string {
+  const base = import.meta.env.BASE_URL || '/';
+  return base.endsWith('/') ? base : `${base}/`;
+}
+
+export function localePath(locale: SiteLocale, hash?: string): string {
+  const path = `${siteRoot()}${locale}/`;
+  if (!hash) return path;
+  const fragment = hash.startsWith('#') ? hash : `#${hash}`;
+  return `${path}${fragment}`;
+}
+
+export function localeFromUrl(pathname: string): SiteLocale {
+  const baseSegments = (import.meta.env.BASE_URL || '/').split('/').filter(Boolean);
+  const segments = pathname.split('/').filter(Boolean);
+  const localeSegment = segments[baseSegments.length];
+  return localeSegment === 'pt' ? 'pt' : 'en';
+}
+
+export function pickLocaleFromAcceptLanguage(acceptLanguage: string | null): SiteLocale {
+  if (!acceptLanguage) return 'en';
+
+  const langs = acceptLanguage
+    .split(',')
+    .map((part) => {
+      const [tag, qPart] = part.trim().split(';q=');
+      return { tag: tag.toLowerCase(), q: qPart ? Number.parseFloat(qPart) : 1 };
+    })
+    .sort((a, b) => b.q - a.q);
+
+  for (const { tag } of langs) {
+    if (tag === 'pt' || tag.startsWith('pt-')) return 'pt';
+    if (tag === 'en' || tag.startsWith('en-')) return 'en';
+  }
+
+  return 'en';
 }
 
 export function absoluteUrl(path: string): string {
@@ -36,7 +70,7 @@ export function absoluteUrl(path: string): string {
   return `${SITE_ORIGIN}${normalized}`;
 }
 
-export function alternateUrls(currentPath: string): Record<SiteLocale, string> {
+export function alternateUrls(): Record<SiteLocale, string> {
   return {
     en: absoluteUrl('/en/'),
     pt: absoluteUrl('/pt/'),

@@ -1,5 +1,8 @@
 ---
 import SculptureAccent from './SculptureAccent.astro';
+import { localeFromUrl, localePath } from '../i18n/seo';
+
+const locale = localeFromUrl(Astro.url.pathname);
 
 const services = [
   {
@@ -63,7 +66,7 @@ const services = [
             <span class="i18n-en" lang="en">{s.text.en}</span>
             <span class="i18n-pt" lang="pt">{s.text.pt}</span>
           </p>
-          <a class="services__more" href={`${import.meta.env.BASE_URL}#contact`}>
+          <a class="services__more" href={localePath(locale, '#contact')}>
             <span class="i18n-en" lang="en">Learn more →</span><span class="i18n-pt" lang="pt">Saber mais →</span>
           </a>
         </article>

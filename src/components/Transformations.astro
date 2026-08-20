@@ -1,4 +1,8 @@
 ---
+import { localeFromUrl, localePath } from '../i18n/seo';
+
+const locale = localeFromUrl(Astro.url.pathname);
+
 const items = [
   {
     breed: { en: 'Miniature Schnauzer', pt: 'Schnauzer miniatura' },
@@ -43,7 +47,7 @@ const items = [
         >
       </h2>
     </div>
-    <a class="transformations__link" href={`${import.meta.env.BASE_URL}#contact`}>
+    <a class="transformations__link" href={localePath(locale, '#contact')}>
       <span class="i18n-en" lang="en">View full portfolio →</span><span class="i18n-pt" lang="pt"
         >Ver portfólio completo →</span
       >
