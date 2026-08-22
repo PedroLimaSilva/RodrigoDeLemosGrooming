@@ -11,20 +11,26 @@ export const BUSINESS = {
   email: undefined as string | undefined,
   instagram: 'https://www.instagram.com/candoro_salon',
   whatsapp: 'https://api.whatsapp.com/send?phone=+351935871091',
-  /** Update with full street address when available for local SEO. */
   address: {
-    streetAddress: 'Lisboa',
+    streetAddress: 'Av. Mal. Craveiro Lopes 8C',
     addressLocality: 'Lisboa',
     addressRegion: 'Lisboa',
-    postalCode: '',
+    postalCode: '1700-284',
     addressCountry: 'PT',
   },
+  mapsUrl:
+    'https://www.google.com/maps/search/?api=1&query=Av.+Mal.+Craveiro+Lopes+8C,+1700-284+Lisboa,+Portugal',
   geo: {
-    latitude: 38.7223,
-    longitude: -9.1393,
+    latitude: 38.759708,
+    longitude: -9.153581,
   },
   priceRange: '€€',
-  areaServed: ['Lisboa', 'Lisbon', 'Portugal'],
+  areaServed: ['Alvalade', 'Lisboa', 'Lisbon', 'Portugal'],
+} as const;
+
+export const ADDRESS_LINES = {
+  en: ['Av. Mal. Craveiro Lopes 8C', '1700-284 Lisbon', 'Portugal'],
+  pt: ['Av. Mal. Craveiro Lopes 8C', '1700-284 Lisboa', 'Portugal'],
 } as const;
 
 function siteRoot(): string {

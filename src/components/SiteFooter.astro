@@ -1,11 +1,12 @@
 ---
 import BrandLogo from './BrandLogo.astro';
-import { localeFromUrl, localePath } from '../i18n/seo';
+import { ADDRESS_LINES, BUSINESS, localeFromUrl, localePath } from '../i18n/seo';
 
 const locale = localeFromUrl(Astro.url.pathname);
 const year = new Date().getFullYear();
-const wa = 'https://api.whatsapp.com/send?phone=+351935871091';
-const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=CAN+D%27ORO+Lisboa';
+const wa = BUSINESS.whatsapp;
+const mapsUrl = BUSINESS.mapsUrl;
+const addressLines = ADDRESS_LINES[locale];
 ---
 
 <footer class="site-footer">
@@ -49,12 +50,14 @@ const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=CAN+D%27ORO+Lis
           <span class="i18n-en" lang="en">Visit us</span><span class="i18n-pt" lang="pt">Visite-nos</span>
         </p>
         <p class="site-footer__text">
-          <a href={mapsUrl} rel="noopener noreferrer" target="_blank">
-            <span class="i18n-en" lang="en">Lisbon, Portugal</span><span class="i18n-pt" lang="pt">Lisboa, Portugal</span>
+          <a class="site-footer__address" href={mapsUrl} rel="noopener noreferrer" target="_blank">
+            {addressLines[0]}<br />
+            {addressLines[1]}<br />
+            {addressLines[2]}
           </a>
         </p>
         <p class="site-footer__text">
-          <a href={wa}>+351 935 871 091</a>
+          <a href={wa}>{BUSINESS.phoneDisplay}</a>
         </p>
         <p class="site-footer__text">
           <span class="i18n-en" lang="en">By appointment only.</span><span class="i18n-pt" lang="pt">Apenas com marcação.</span>
@@ -156,6 +159,10 @@ const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=CAN+D%27ORO+Lis
 
   .site-footer a:hover {
     color: $champagne;
+  }
+
+  .site-footer__address {
+    line-height: 1.55;
   }
 
   .site-footer__text {
