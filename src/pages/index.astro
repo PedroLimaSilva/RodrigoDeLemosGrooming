@@ -1,27 +1,52 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import SiteHeader from '../components/SiteHeader.astro';
-import Hero from '../components/Hero.astro';
-import Philosophy from '../components/Philosophy.astro';
-import Services from '../components/Services.astro';
-import Transformations from '../components/Transformations.astro';
-import Competitions from '../components/Competitions.astro';
-import Salon from '../components/Salon.astro';
-import BookingCTA from '../components/BookingCTA.astro';
-import SiteFooter from '../components/SiteFooter.astro';
+import { LOCALE_STORAGE_KEY } from '../i18n/constants';
+import { localePath } from '../i18n/seo';
+
+const fallbackTarget = localePath('en');
 ---
 
-<Layout>
-  <SiteHeader />
-  <main id="main">
-    <Hero />
-    <Philosophy />
-    <Services />
-    <Transformations />
-    <Competitions />
-    <!-- <Testimonials /> -->
-    <Salon />
-    <BookingCTA />
-  </main>
-  <SiteFooter />
-</Layout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CAN D'ORO</title>
+    <link rel="canonical" href={fallbackTarget} />
+    <meta http-equiv="refresh" content={`0;url=${fallbackTarget}`} />
+    <script
+      is:inline
+      define:vars={{
+        storageKey: LOCALE_STORAGE_KEY,
+        siteRoot: import.meta.env.BASE_URL,
+      }}
+    >
+      (function () {
+        function siteBase() {
+          var root = siteRoot || '/';
+          return root.endsWith('/') ? root : root + '/';
+        }
+        function pick() {
+          try {
+            var stored = localStorage.getItem(storageKey);
+            if (stored === 'en' || stored === 'pt') return stored;
+          } catch (e) {}
+          var nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
+          var lo = String(nav).toLowerCase();
+          if (lo === 'pt' || lo.indexOf('pt-') === 0) return 'pt';
+          return 'en';
+        }
+        window.location.replace(siteBase() + pick() + '/');
+      })();
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content={`0;url=${fallbackTarget}`} />
+    </noscript>
+  </head>
+  <body>
+    <p>
+      <a href={localePath('en')}>English</a>
+      ·
+      <a href={localePath('pt')}>Português</a>
+    </p>
+  </body>
+</html>

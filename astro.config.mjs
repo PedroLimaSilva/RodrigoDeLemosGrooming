@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 // GitHub Pages project site
 // export default defineConfig({
@@ -8,4 +9,5 @@ import { defineConfig } from 'astro/config';
 
 export default defineConfig({
   site: 'https://candoro.pt',
+  integrations: [sitemap()],
 });

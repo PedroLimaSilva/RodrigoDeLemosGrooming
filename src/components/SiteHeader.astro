@@ -1,13 +1,14 @@
 ---
 import BrandLogo from './BrandLogo.astro';
+import { localeFromUrl, localePath } from '../i18n/seo';
 
-const base = import.meta.env.BASE_URL;
+const locale = localeFromUrl(Astro.url.pathname);
 const links = [
-  { href: `${base}#home`, en: 'Home', pt: 'Início' },
-  { href: `${base}#services`, en: 'Services', pt: 'Serviços' },
-  { href: `${base}#portfolio`, en: 'Portfolio', pt: 'Portfólio' },
-  { href: `${base}#philosophy`, en: 'About', pt: 'Sobre' },
-  { href: `${base}#contact`, en: 'Contact', pt: 'Contacto' },
+  { hash: '#home', en: 'Home', pt: 'Início' },
+  { hash: '#services', en: 'Services', pt: 'Serviços' },
+  { hash: '#portfolio', en: 'Portfolio', pt: 'Portfólio' },
+  { hash: '#philosophy', en: 'About', pt: 'Sobre' },
+  { hash: '#contact', en: 'Contact', pt: 'Contacto' },
 ];
 ---
 
@@ -26,9 +27,9 @@ const links = [
     >
       <ul>
         {
-          links.map(({ href, en, pt }) => (
+          links.map(({ hash, en, pt }) => (
             <li>
-              <a href={href}>
+              <a href={localePath(locale, hash)}>
                 <span class="i18n-en" lang="en">{en}</span>
                 <span class="i18n-pt" lang="pt">{pt}</span>
               </a>

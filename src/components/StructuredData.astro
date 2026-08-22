@@ -1,0 +1,67 @@
+---
+import type { SiteLocale } from '../i18n/constants';
+import { pageMeta } from '../i18n/doc';
+import { BUSINESS, OG_IMAGE, absoluteUrl, localePath } from '../i18n/seo';
+
+interface Props {
+  locale: SiteLocale;
+}
+
+const { locale } = Astro.props;
+
+const days = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
+] as const;
+
+const appointmentNote =
+  locale === 'pt' ? 'Apenas com marcação' : 'By appointment only';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'PetGroomer',
+  name: BUSINESS.name,
+  legalName: BUSINESS.legalName,
+  description: pageMeta.description[locale],
+  url: absoluteUrl(localePath(locale)),
+  telephone: BUSINESS.phone,
+  image: OG_IMAGE,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: BUSINESS.address.streetAddress,
+    addressLocality: BUSINESS.address.addressLocality,
+    addressRegion: BUSINESS.address.addressRegion,
+    ...(BUSINESS.address.postalCode
+      ? { postalCode: BUSINESS.address.postalCode }
+      : {}),
+    addressCountry: BUSINESS.address.addressCountry,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: BUSINESS.geo.latitude,
+    longitude: BUSINESS.geo.longitude,
+  },
+  areaServed: BUSINESS.areaServed.map((name) => ({
+    '@type': 'Place',
+    name,
+  })),
+  priceRange: BUSINESS.priceRange,
+  sameAs: [BUSINESS.instagram],
+  openingHoursSpecification: days.map((dayOfWeek) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek,
+    opens: '09:00',
+    closes: '19:00',
+    description: appointmentNote,
+  })),
+};
+
+const jsonLd = JSON.stringify(schema);
+---
+
+<script type="application/ld+json" set:html={jsonLd} />

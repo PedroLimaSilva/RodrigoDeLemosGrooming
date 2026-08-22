@@ -1,10 +1,13 @@
 ---
+import { localeFromUrl, localePath } from '../i18n/seo';
+
 interface Props {
   variant?: 'header' | 'footer';
   class?: string;
 }
 
 const { variant = 'header', class: className = '' } = Astro.props;
+const locale = localeFromUrl(Astro.url.pathname);
 const base = import.meta.env.BASE_URL;
 const logoHorizontal = `${base}candoro-logo-horizontal.svg`;
 const logoVertical = `${base}candoro-logo-vertical.svg`;
@@ -26,7 +29,7 @@ const logoVertical = `${base}candoro-logo-vertical.svg`;
       />
     </div>
   ) : (
-    <a class:list={['brand-logo', 'brand-logo--header', className]} href={`${base}#home`}>
+    <a class:list={['brand-logo', 'brand-logo--header', className]} href={localePath(locale, '#home')}>
       <img
         class="brand-logo__lockup"
         src={logoHorizontal}
